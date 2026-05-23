@@ -2,15 +2,7 @@ model = "gpt-5.5"
 model_reasoning_effort = "medium"
 plan_mode_reasoning_effort = "high"
 personality = "pragmatic""
-
-[projects."/Users/kevin.burk/repos/spog-ui"]
-trust_level = "trusted"
-
-[projects."/Users/kevin.burk/repos/seb-coaching-dashboard"]
-trust_level = "trusted"
-
-[projects."/Users/kevin.burk"]
-trust_level = "trusted"
+rust_level = "trusted"
 
 [plugins."github@openai-curated"]
 enabled = true
