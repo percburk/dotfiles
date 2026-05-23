@@ -1,0 +1,67 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zjstatus" {
+                color_bg "#0b0e14"
+                color_surface "#131721"
+                color_surface2 "#1f2430"
+                color_fg "#cccac2"
+                color_muted "#565b66"
+                color_orange "#ff8f40"
+                color_yellow "#e6b450"
+                color_purple "#d2a6ff"
+                color_blue "#73b8ff"
+                color_green "#aad94c"
+                color_red "#f07178"
+                color_cyan "#59c2ff"
+
+                format_left "#[bg=$surface2,fg=$purple]  {session} #[bg=$bg] {mode}#[bg=$bg] {tabs}"
+                format_center "{notifications}"
+                format_right "#[bg=$bg,fg=$purple]#[bg=$purple,fg=$surface2]󰃭 #[bg=$surface2,fg=$purple] {datetime} "
+                format_space "#[bg=$bg]"
+                format_hide_on_overlength "true"
+                format_precedence "lrc"
+
+                border_enabled "false"
+                hide_frame_for_single_pane "false"
+
+                mode_normal "#[bg=$green,fg=$bg,bold] #[bg=$bg,fg=$green]"
+                mode_tmux "#[bg=$purple,fg=$bg,bold] TMUX#[bg=$bg,fg=$purple]"
+                mode_locked "#[bg=$purple,fg=$surface2,bold] #[bg=$bg,fg=$purple]"
+                mode_pane "#[bg=$blue,fg=$bg,bold] PANE#[bg=$bg,fg=$blue]"
+                mode_tab "#[bg=$orange,fg=$bg,bold] TAB#[bg=$bg,fg=$orange]"
+                mode_scroll "#[bg=$cyan,fg=$bg,bold] SCROLL#[bg=$bg,fg=$cyan]"
+                mode_enter_search "#[bg=$yellow,fg=$bg,bold] ENT-SEARCH#[bg=$bg,fg=$yellow]"
+                mode_search "#[bg=$yellow,fg=$bg,bold] SEARCH#[bg=$bg,fg=$yellow]"
+                mode_resize "#[bg=$orange,fg=$bg,bold] RESIZE#[bg=$bg,fg=$orange]"
+                mode_rename_tab "#[bg=$yellow,fg=$bg,bold] RENAME-TAB#[bg=$bg,fg=$yellow]"
+                mode_rename_pane "#[bg=$yellow,fg=$bg,bold] RENAME-PANE#[bg=$bg,fg=$yellow]"
+                mode_move "#[bg=$orange,fg=$bg,bold] MOVE#[bg=$bg,fg=$orange]"
+                mode_session "#[bg=$cyan,fg=$bg,bold] SESSION#[bg=$bg,fg=$cyan]"
+                mode_prompt "#[bg=$blue,fg=$bg,bold] PROMPT#[bg=$bg,fg=$blue]"
+
+                tab_normal "#[bg=$bg,fg=$muted]#[bg=$muted,fg=$blue,bold]{index} #[bg=$surface2,fg=$blue] {name}{floating_indicator}#[bg=$bg,fg=$surface2]"
+                tab_normal_fullscreen "#[bg=$bg,fg=$muted]#[bg=$muted,fg=$blue,bold]{index} #[bg=$surface2,fg=$blue] {name}{fullscreen_indicator}#[bg=$bg,fg=$surface2]"
+                tab_normal_sync "#[bg=$bg,fg=$muted]#[bg=$muted,fg=$blue,bold]{index} #[bg=$surface2,fg=$blue] {name}{sync_indicator}#[bg=$bg,fg=$surface2]"
+                tab_active "#[bg=$bg,fg=$orange]#[bg=$orange,fg=$surface2,bold]{index} #[bg=$surface2,fg=$orange] {name}{floating_indicator}#[bg=$bg,fg=$surface2]"
+                tab_active_fullscreen "#[bg=$bg,fg=$orange]#[bg=$orange,fg=$surface2,bold]{index} #[bg=$surface2,fg=$orange] {name}{fullscreen_indicator}#[bg=$bg,fg=$surface2]"
+                tab_active_sync "#[bg=$bg,fg=$orange]#[bg=$orange,fg=$surface2,bold]{index} #[bg=$surface2,fg=$orange] {name}{sync_indicator}#[bg=$bg,fg=$surface2]"
+                tab_rename "#[bg=$bg,fg=$yellow]#[bg=$yellow,fg=$surface2,bold]{index} #[bg=$surface2,fg=$yellow] {name}{floating_indicator}#[bg=$bg,fg=$surface2]"
+                tab_separator "#[bg=$bg] "
+
+                tab_sync_indicator " "
+                tab_fullscreen_indicator " 󰊓"
+                tab_floating_indicator " 󰹙"
+
+                notification_format_unread "#[bg=$bg,fg=$yellow]#[bg=$yellow,fg=$bg] #[bg=$surface2,fg=$yellow] {message} #[bg=$bg,fg=$surface2]"
+                notification_format_no_notifications ""
+                notification_show_interval "10"
+
+                datetime "{format}"
+                datetime_format "%m/%d 󰅐 %r"
+                datetime_timezone "America/Chicago"
+            }
+        }
+    }
+}

@@ -1,0 +1,230 @@
+"$schema" = "https://starship.rs/config-schema.json"
+add_newline = true
+palette = "ayu_dark"
+
+[aws]
+disabled = true
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[buf]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[c]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[character]
+success_symbol = "[](bold bright-yellow) "
+error_symbol = "[](bold red) "
+vimcmd_symbol = "[](bold blue)"
+
+[cmd_duration]
+format = '\([⏱ ($duration)]($style)\) '
+style = "orange"
+
+[conda]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[dart]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+truncate_to_repo = true
+repo_root_style = "bright-magenta"
+style = "orange"
+
+[docker_context]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[dotnet]
+symbol = "󰪮"
+format = "→ [$symbol( $tfm)]($style) "
+
+[elixir]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[elm]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[fossil_branch]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[git_branch]
+symbol = " "
+truncation_length = 25
+truncation_symbol = "…"
+ignore_branches = ["master", "main"]
+style = "blue"
+format = "→ [$symbol$branch]($style) "
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+
+[git_status]
+format = "[(($all_status)($ahead_behind) )]($style)"
+style = "bold bright-yellow"
+
+[golang]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[haxe]
+symbol = "⌘ "
+format = "→ [$symbol($version)]($style) "
+
+[hg_branch]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[hostname]
+ssh_symbol = " "
+
+[java]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[julia]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[lua]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[memory_usage]
+symbol = " "
+
+[meson]
+symbol = "喝 "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+style = "bright-green"
+format = "→ [$symbol($version)]($style) "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "﯑ "
+Gentoo = " "
+HardenedBSD = "ﲊ "
+Illumos = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+OracleLinux = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+Solus = "ﴱ "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+
+[package]
+symbol = " "
+disabled = true
+
+[pijul_channel]
+symbol = "🪺 "
+
+[python]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[rlang]
+symbol = "ﳒ "
+format = "→ [$symbol($version)]($style) "
+
+[ruby]
+symbol = " "
+style = "bright-blue"
+format = "→ [$symbol($version)]($style) "
+
+[rust]
+symbol = " "
+style = "bright-red"
+format = "→ [$symbol($version)]($style) "
+
+[scala]
+symbol = " "
+format = "→ [$symbol($version)]($style) "
+
+[spack]
+symbol = "🅢 "
+format = "→ [$symbol($version)]($style) "
+
+[swift]
+format = "→ [$symbol($version)]($style) "
+style = "bold orange"
+
+[terraform]
+format = "→ [$symbol($version)( $workspace)]($style) "
+
+[palettes.ayu_dark]
+background = "#0b0e14"
+foreground = "#cccac2"
+black = "#01060e"
+red = "#f07178"
+green = "#aad94c"
+yellow = "#e6b450"
+blue = "#73b8ff"
+magenta = "#d2a6ff"
+cyan = "#59c2ff"
+white = "#c7c7c7"
+"bright-black" = "#686868"
+"bright-red" = "#f07178"
+"bright-green" = "#c2d94c"
+"bright-yellow" = "#ffb454"
+"bright-blue" = "#59c2ff"
+"bright-magenta" = "#d2a6ff"
+"bright-cyan" = "#95e6cb"
+"bright-white" = "#ffffff"
+orange = "#ff8f40"
+pink = "#f07178"
+aqua = "#59c2ff"

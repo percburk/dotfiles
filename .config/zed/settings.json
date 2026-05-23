@@ -1,0 +1,181 @@
+// https://zed.dev/docs/configuring-zed
+{
+  // Settings I actually touch
+  "ui_font_size": 15.0,
+  "buffer_font_size": 13.0,
+  "buffer_font_weight": 400.0,
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "vim_mode": false,
+  "theme": "honeycrisp IIe tang",
+  "ui_font_family": "Geist Mono",
+  "ui_font_features": {
+    "calt": false,
+    "liga": false,
+    "dlig": false,
+  },
+  "ui_font_weight": 400.0,
+  "buffer_font_family": "Geist Mono",
+  "buffer_font_features": {
+    "calt": false,
+    "liga": false,
+    "dlig": false,
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "terminal": {
+    "font_family": "GeistMono Nerd Font",
+    "font_size": 12,
+    "cursor_shape": "bar",
+    "blinking": "on",
+    "font_features": {
+      "calt": false,
+      "liga": false,
+      "dlig": false,
+    },
+    "toolbar": { "breadcrumbs": false },
+  },
+  "edit_predictions": {
+    "provider": "none",
+    "mode": "eager",
+  },
+  // That's pretty much it
+  "agent": {
+    "dock": "left",
+    "default_model": {
+      "model": "claude-sonnet-4.5",
+      "provider": "copilot_chat",
+    },
+    "model_parameters": [],
+  },
+  "agent_servers": {
+    "cursor": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "autosave": {
+    "after_delay": { "milliseconds": 500 },
+  },
+  "base_keymap": "VSCode",
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+      "max_severity": null,
+      "min_column": 40,
+      "padding": 10,
+      "update_debounce_ms": 1000,
+    },
+  },
+  "file_types": {
+    "JSON": [".eslintrc", ".prettierrc"],
+    "XML": ["*.csproj", "*.esproj"],
+  },
+  "git": {
+    "inline_blame": {
+      "padding": 10,
+      "min_column": 40,
+      "delay_ms": 2000,
+    },
+  },
+  "inline_code_actions": false,
+  "indent_guides": {
+    "enabled": false,
+  },
+  "languages": {
+    "CSharp": {
+      "tab_size": 4,
+    },
+    "CSS": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "HTML": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "Java": {
+      "tab_size": 4,
+    },
+    "JavaScript": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "JSON": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "JSONC": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "Kdl": {
+      "tab_size": 4,
+    },
+    "Markdown": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "Python": {
+      "tab_size": 4,
+    },
+    "SCSS": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "TSX": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "TypeScript": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+    "YAML": {
+      "formatter": "prettier",
+      "tab_size": 2,
+    },
+  },
+  "minimap": { "show": "never" },
+  "project_panel": {
+    "dock": "right",
+    "auto_fold_dirs": false,
+    "entry_spacing": "standard",
+    "indent_guides": { "show": "never" },
+    "indent_size": 10,
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": false,
+  },
+  "show_wrap_guides": true,
+  "snippet_sort_order": "top",
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false,
+  },
+  "tab_size": 2,
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "all",
+  },
+  "vim": {
+    "toggle_relative_line_numbers": true,
+  },
+}

@@ -1,0 +1,29 @@
+{
+  "lastChangelogVersion": "0.75.5",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "medium",
+  "hideThinkingBlock": true,
+  "compaction": {
+    "enabled": false
+  },
+  "terminal": {
+    "showImages": true,
+    "clearOnShrink": true,
+    "showTerminalProgress": false
+  },
+  "theme": "ayu-dark",
+  "treeFilterMode": "default",
+  "collapseChangelog": true,
+  "editorPaddingX": 1,
+  "packages": [
+    "npm:@juanibiapina/pi-extension-settings",
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
+    "npm:@juanibiapina/pi-powerbar",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-ask-user",
+    "npm:@catdaemon/pi-cmux"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+	"powerbar": {
+		"separator": " | ",
+		"bar-style": "continuous",
+		"bar-width": "6",
+		"right": "model"
+	}
+}
