@@ -1,10 +1,10 @@
 import path from 'node:path'
-import type {
-  ExtensionAPI,
-  ExtensionContext,
+import {
+  type ExtensionAPI,
+  type ExtensionContext,
 } from '@earendil-works/pi-coding-agent'
 import { getSetting } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/storage.ts'
-import type { SettingDefinition } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/types.ts'
+import { type SettingDefinition } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/types.ts'
 
 const RESET = '\x1b[0m'
 const BOLD = '\x1b[1m'
@@ -12,27 +12,21 @@ const BOLD = '\x1b[1m'
 type Rgb = [number, number, number]
 type GradientName = 'pink-purple' | 'yellow-orange' | 'blue'
 type GradientSetting = GradientName | 'random'
-type ArtName = 'Rebel' | 'Larry 3D' | 'Isometric1' | 'Impossible' | 'Terrace'
+type ArtName = 'Rebel' | 'Larry 3D' | 'Big Money-ne' | 'Impossible' | 'Terrace'
 type ArtSetting = ArtName | 'random'
-
-const HOT_PINK: Rgb = [255, 74, 188]
-const ROSE: Rgb = [255, 118, 205]
-const MAGENTA: Rgb = [218, 70, 239]
-const VIOLET: Rgb = [168, 85, 247]
-const PURPLE: Rgb = [210, 166, 255]
 
 const GRADIENT_NAMES: GradientName[] = ['pink-purple', 'yellow-orange', 'blue']
 
 const GRADIENTS: Record<GradientName, Rgb[]> = {
   'pink-purple': [
-    HOT_PINK,
-    ROSE,
-    MAGENTA,
-    VIOLET,
-    PURPLE,
-    VIOLET,
-    MAGENTA,
-    ROSE,
+    [255, 74, 188],
+    [255, 118, 205],
+    [218, 70, 239],
+    [168, 85, 247],
+    [210, 166, 255],
+    [168, 85, 247],
+    [218, 70, 239],
+    [255, 118, 205],
   ],
   'yellow-orange': [
     [170, 217, 76],
@@ -57,7 +51,7 @@ const GRADIENTS: Record<GradientName, Rgb[]> = {
 const ART_NAMES: ArtName[] = [
   'Rebel',
   'Larry 3D',
-  'Isometric1',
+  'Big Money-ne',
   'Impossible',
   'Terrace',
 ]
@@ -87,18 +81,18 @@ const ASCII_ART: Record<ArtName, string[]> = {
     '   \\ \\_\\      ',
     '    \\/_/      ',
   ],
-  Isometric1: [
-    '      ___                 ',
-    '     /\\  \\          ___   ',
-    '    /::\\  \\        /\\  \\  ',
-    '   /:/\\:\\  \\       \\:\\  \\ ',
-    '  /::\\~\\:\\  \\      /::\\__\\',
-    ' /:/\\:\\ \\:\\__\\  __/:/\\/__/',
-    ' \\/__\\:\\/:/  / /\\/:/  /   ',
-    '      \\::/  /  \\::/__/    ',
-    '       \\/__/    \\:\\__\\    ',
-    '                 \\/__/    ',
-    '                          ',
+  'Big Money-ne': [
+    '           /$$',
+    '          |__/',
+    '  /$$$$$$  /$$',
+    ' /$$__  $$| $$',
+    '| $$  \\ $$| $$',
+    '| $$  | $$| $$',
+    '| $$$$$$$/| $$',
+    '| $$____/ |__/',
+    '| $$          ',
+    '| $$          ',
+    '|__/          ',
   ],
   Impossible: [
     '         _        _     ',
@@ -223,6 +217,7 @@ function renderHeader(width: number, phase: number, subtitleText: string) {
   return [
     '',
     ...lines,
+    '',
     `${BOLD}${gradientText(subtitle, phase + 0.18, palette)}${RESET}`,
     '',
   ]
@@ -263,7 +258,7 @@ export default function (pi: ExtensionAPI) {
           values: [
             'Rebel',
             'Larry 3D',
-            'Isometric1',
+            'Big Money-ne',
             'Impossible',
             'Terrace',
             'random',
