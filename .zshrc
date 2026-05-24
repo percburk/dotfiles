@@ -14,7 +14,7 @@ export EZA_CONFIG_DIR="$HOME/.config/eza"
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 
 # path to oh-my-zsh installation.
-export ZSH="/Users/kevinburk/.oh-my-zsh"
+export ZSH="/Users/kevin.burk/.oh-my-zsh"
 
 # Local bin and system paths
 export PATH="$HOME/.local/bin:$PATH"
@@ -107,5 +107,6 @@ alias lg="lazygit"
 alias cx="codex"
 alias cc="claude"
 
-# Dotfiles bare repo alias
-alias cfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# Dotfiles bare repo aliases
+alias cfg='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cfglg='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
