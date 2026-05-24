@@ -8,6 +8,11 @@
 	"welcome": {
 		"enabled": "on",
 		"gradient": "random",
-		"art": "random"
+		"art": "random",
+		"temperatureUnit": "fahrenheit",
+		"weather": "on",
+		"piVersion": "on",
+		"model": "on",
+		"cwd": "on"
 	}
 }

@@ -19,7 +19,6 @@
   "packages": [
     "npm:@juanibiapina/pi-extension-settings",
     "npm:pi-web-access",
-    "npm:pi-subagents",
     "npm:pi-mcp-adapter",
     "npm:@juanibiapina/pi-powerbar",
     "npm:@juicesharp/rpiv-todo",

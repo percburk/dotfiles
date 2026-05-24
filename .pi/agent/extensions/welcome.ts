@@ -1,5 +1,6 @@
 import path from 'node:path'
 import {
+  VERSION,
   type ExtensionAPI,
   type ExtensionContext,
 } from '@earendil-works/pi-coding-agent'
@@ -80,6 +81,8 @@ const WEATHER_ICONS: Record<WeatherCondition, string> = {
 }
 
 const WEATHER_TIMEOUT_MS = 5_000
+const WEATHER_RETRY_AFTER_MS = 60_000
+const WEATHER_LOADING_TEXT = '░░░░░░░'
 
 const ASCII_ART: Record<ArtName, string[]> = {
   Rebel: [
@@ -198,6 +201,18 @@ function isWeatherEnabled() {
   return getSetting('welcome', 'weather', 'on') === 'on'
 }
 
+function isPiVersionEnabled() {
+  return getSetting('welcome', 'piVersion', 'on') === 'on'
+}
+
+function isModelEnabled() {
+  return getSetting('welcome', 'model', 'on') === 'on'
+}
+
+function isCwdEnabled() {
+  return getSetting('welcome', 'cwd', 'on') === 'on'
+}
+
 function getTemperatureUnit() {
   const unit = getSetting('welcome', 'temperatureUnit', 'fahrenheit')
   return unit === 'celsius' ? 'celsius' : 'fahrenheit'
@@ -268,7 +283,13 @@ async function fetchJson<T>(url: string, timeoutMs = WEATHER_TIMEOUT_MS): Promis
   }
 }
 
-async function fetchWeatherText(unit: TemperatureUnit) {
+type WeatherData = {
+  temperatureCelsius: number
+  weatherCode: number
+  isDay: boolean
+}
+
+async function fetchWeatherData(): Promise<WeatherData> {
   const location = await fetchJson<{ latitude?: number; longitude?: number }>(
     'https://ipapi.co/json/'
   )
@@ -280,7 +301,7 @@ async function fetchWeatherText(unit: TemperatureUnit) {
     latitude: String(location.latitude),
     longitude: String(location.longitude),
     current: 'temperature_2m,weather_code,is_day',
-    temperature_unit: unit,
+    temperature_unit: 'celsius',
   })
   const weather = await fetchJson<{
     current?: { temperature_2m?: number; weather_code?: number; is_day?: number }
@@ -297,7 +318,19 @@ async function fetchWeatherText(unit: TemperatureUnit) {
     throw new Error('Unable to determine weather')
   }
 
-  const condition = conditionForWeatherCode(weatherCode, isDay === 1)
+  return {
+    temperatureCelsius: temperature,
+    weatherCode,
+    isDay: isDay === 1,
+  }
+}
+
+function formatWeatherText(data: WeatherData, unit: TemperatureUnit) {
+  const condition = conditionForWeatherCode(data.weatherCode, data.isDay)
+  const temperature =
+    unit === 'celsius'
+      ? data.temperatureCelsius
+      : (data.temperatureCelsius * 9) / 5 + 32
   return `${WEATHER_ICONS[condition]} ${Math.round(temperature)}${unitSuffix(unit)}`
 }
 
@@ -321,10 +354,61 @@ function renderHeader(width: number, phase: number, subtitleText: string) {
 export default function (pi: ExtensionAPI) {
   let requestRender: (() => void) | undefined
   let currentModelId = 'no model selected'
-  let weatherText: string | undefined
+  let weatherData: WeatherData | undefined
+  let weatherFetchInFlight = false
+  let lastWeatherFetchAttempt = 0
+
+  function ensureWeatherLoaded() {
+    if (!isWeatherEnabled() || weatherData || weatherFetchInFlight) return
+    const now = Date.now()
+    if (lastWeatherFetchAttempt && now - lastWeatherFetchAttempt < WEATHER_RETRY_AFTER_MS) return
+
+    weatherFetchInFlight = true
+    lastWeatherFetchAttempt = now
+    void fetchWeatherData()
+      .then((data) => {
+        weatherData = data
+        requestRender?.()
+      })
+      .catch(() => {
+        weatherData = undefined
+      })
+      .finally(() => {
+        weatherFetchInFlight = false
+      })
+  }
+
+  function weatherSubtitleText() {
+    if (!isWeatherEnabled()) return undefined
+    ensureWeatherLoaded()
+    if (!weatherData) return WEATHER_LOADING_TEXT
+    return formatWeatherText(weatherData, getTemperatureUnit())
+  }
+
+  function piVersionSubtitleText() {
+    if (!isPiVersionEnabled()) return undefined
+    return `v${VERSION}`
+  }
+
+  function modelSubtitleText() {
+    if (!isModelEnabled()) return undefined
+    return currentModelId
+  }
+
+  function cwdSubtitleText() {
+    if (!isCwdEnabled()) return undefined
+    return projectName()
+  }
 
   function subtitleText() {
-    return [currentModelId, projectName(), weatherText].filter(Boolean).join(' · ')
+    return [
+      piVersionSubtitleText(),
+      modelSubtitleText(),
+      cwdSubtitleText(),
+      weatherSubtitleText(),
+    ]
+      .filter(Boolean)
+      .join(' · ')
   }
 
   function registerSettings() {
@@ -333,15 +417,15 @@ export default function (pi: ExtensionAPI) {
       settings: [
         {
           id: 'enabled',
-          label: 'ASCII Header',
-          description: "Show ASCII header instead of pi's default header",
+          label: 'Enabled',
+          description: "Show welcome header instead of pi's default header",
           defaultValue: 'on',
           values: ['on', 'off'],
         },
         {
           id: 'gradient',
           label: 'Color Gradient',
-          description: 'Choose the color gradient for the ASCII header',
+          description: 'Choose the color gradient for the welcome header',
           defaultValue: 'pink-purple',
           values: [
             'pink-purple',
@@ -351,23 +435,44 @@ export default function (pi: ExtensionAPI) {
           ] satisfies GradientSetting[],
         },
         {
+          id: 'piVersion',
+          label: 'Pi Version',
+          description: 'Show the pi version in the welcome header',
+          defaultValue: 'on',
+          values: ['on', 'off'],
+        },
+        {
+          id: 'model',
+          label: 'Model',
+          description: 'Show the selected model in the welcome header',
+          defaultValue: 'on',
+          values: ['on', 'off'],
+        },
+        {
+          id: 'cwd',
+          label: 'Current Directory',
+          description: 'Show the current directory/project name in the welcome header',
+          defaultValue: 'on',
+          values: ['on', 'off'],
+        },
+        {
           id: 'weather',
           label: 'Weather',
-          description: 'Show current weather in the ASCII header',
+          description: 'Show the weather widget',
           defaultValue: 'on',
           values: ['on', 'off'],
         },
         {
           id: 'temperatureUnit',
           label: 'Temperature Unit',
-          description: 'Choose the temperature unit for current weather',
+          description: 'Choose the temperature unit for the weather widget',
           defaultValue: 'fahrenheit',
           values: ['fahrenheit', 'celsius'] satisfies TemperatureUnit[],
         },
         {
           id: 'art',
           label: 'ASCII Art',
-          description: 'Choose the ASCII art for the header',
+          description: 'Choose the ASCII art for the welcome header',
           defaultValue: 'Rebel',
           values: [
             'Rebel',
@@ -415,20 +520,15 @@ export default function (pi: ExtensionAPI) {
     sessionRandomGradientName = randomGradientName()
     sessionRandomArtName = randomArtName()
     currentModelId = ctx.model?.id ?? 'no model selected'
-    weatherText = undefined
+    weatherData = undefined
+    weatherFetchInFlight = false
+    lastWeatherFetchAttempt = 0
     if (!ctx.hasUI) return
 
     applyHeaderSetting(ctx)
 
     if (isEnabled() && isWeatherEnabled()) {
-      void fetchWeatherText(getTemperatureUnit())
-        .then((text) => {
-          weatherText = text
-          requestRender?.()
-        })
-        .catch(() => {
-          weatherText = undefined
-        })
+      ensureWeatherLoaded()
     }
   })
 
