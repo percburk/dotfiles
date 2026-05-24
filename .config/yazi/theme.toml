@@ -38,10 +38,10 @@ normal_main = { fg = "#0b0e14", bg = "#d2a6ff", bold = true }
 normal_alt = { fg = "#73b8ff", bg = "#1f2430", bold = true }
 
 select_main = { fg = "#0b0e14", bg = "#73b8ff", bold = true }
-select_alt = { fg = "#0b0e14", bg = "#73b8ff", bold = true }
+select_alt = { fg = "#73b8ff", bg = "#1f2430", bold = true }
 
 unset_main = { fg = "#0b0e14", bg = "#f07178", bold = true }
-unset_alt = { fg = "#0b0e14", bg = "#f07178", bold = true }
+unset_alt = { fg = "#73b8ff", bg = "#1f2430", bold = true }
 
 [status]
 overall   = {}
