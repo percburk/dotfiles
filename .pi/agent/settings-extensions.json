@@ -4,5 +4,10 @@
 		"bar-style": "continuous",
 		"bar-width": "6",
 		"right": "model"
+	},
+	"welcome": {
+		"enabled": "on",
+		"gradient": "random",
+		"art": "random"
 	}
 }
