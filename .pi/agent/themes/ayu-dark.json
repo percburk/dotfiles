@@ -75,7 +75,7 @@
     "syntaxType": "darkSpecial",
     "syntaxOperator": "darkOperator",
     "syntaxPunctuation": "darkFg",
-    "thinkingOff": "darkLine",
+    "thinkingOff": "#444B56",
     "thinkingMinimal": "darkFgMuted",
     "thinkingLow": "darkTag",
     "thinkingMedium": "darkConstant",
