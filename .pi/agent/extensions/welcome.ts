@@ -14,6 +14,17 @@ type GradientName = 'pink-purple' | 'yellow-orange' | 'blue'
 type GradientSetting = GradientName | 'random'
 type ArtName = 'Rebel' | 'Larry 3D' | 'Big Money-ne' | 'Impossible' | 'Terrace'
 type ArtSetting = ArtName | 'random'
+type TemperatureUnit = 'fahrenheit' | 'celsius'
+type WeatherCondition =
+  | 'sunny'
+  | 'clear-night'
+  | 'partly-cloudy'
+  | 'cloudy'
+  | 'fog'
+  | 'drizzle'
+  | 'rain'
+  | 'thunderstorm'
+  | 'snow'
 
 const GRADIENT_NAMES: GradientName[] = ['pink-purple', 'yellow-orange', 'blue']
 
@@ -55,6 +66,20 @@ const ART_NAMES: ArtName[] = [
   'Impossible',
   'Terrace',
 ]
+
+const WEATHER_ICONS: Record<WeatherCondition, string> = {
+  sunny: '󰖙',
+  'clear-night': '󰖔',
+  'partly-cloudy': '󰖕',
+  cloudy: '󰖐',
+  fog: '󰖑',
+  drizzle: '󰖗',
+  rain: '󰖖',
+  thunderstorm: '󰙾',
+  snow: '󰖘',
+}
+
+const WEATHER_TIMEOUT_MS = 5_000
 
 const ASCII_ART: Record<ArtName, string[]> = {
   Rebel: [
@@ -169,6 +194,15 @@ function getGradientSetting() {
   return getSetting('welcome', 'gradient', 'pink-purple') ?? 'pink-purple'
 }
 
+function isWeatherEnabled() {
+  return getSetting('welcome', 'weather', 'on') === 'on'
+}
+
+function getTemperatureUnit() {
+  const unit = getSetting('welcome', 'temperatureUnit', 'fahrenheit')
+  return unit === 'celsius' ? 'celsius' : 'fahrenheit'
+}
+
 function randomGradientName() {
   return GRADIENT_NAMES[Math.floor(Math.random() * GRADIENT_NAMES.length)]!
 }
@@ -206,6 +240,67 @@ function getAsciiArt() {
   return ASCII_ART.Rebel
 }
 
+function conditionForWeatherCode(code: number, isDay: boolean): WeatherCondition {
+  if (code === 0) return isDay ? 'sunny' : 'clear-night'
+  if (code === 1 || code === 2) return 'partly-cloudy'
+  if (code === 3) return 'cloudy'
+  if (code === 45 || code === 48) return 'fog'
+  if ([51, 53, 55, 56, 57].includes(code)) return 'drizzle'
+  if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code)) return 'rain'
+  if ([71, 73, 75, 77, 85, 86].includes(code)) return 'snow'
+  if ([95, 96, 99].includes(code)) return 'thunderstorm'
+  return 'cloudy'
+}
+
+function unitSuffix(unit: TemperatureUnit) {
+  return unit === 'celsius' ? '°C' : '°F'
+}
+
+async function fetchJson<T>(url: string, timeoutMs = WEATHER_TIMEOUT_MS): Promise<T> {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    const response = await fetch(url, { signal: controller.signal })
+    if (!response.ok) throw new Error(`Request failed: ${response.status}`)
+    return (await response.json()) as T
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
+async function fetchWeatherText(unit: TemperatureUnit) {
+  const location = await fetchJson<{ latitude?: number; longitude?: number }>(
+    'https://ipapi.co/json/'
+  )
+  if (typeof location.latitude !== 'number' || typeof location.longitude !== 'number') {
+    throw new Error('Unable to determine location')
+  }
+
+  const params = new URLSearchParams({
+    latitude: String(location.latitude),
+    longitude: String(location.longitude),
+    current: 'temperature_2m,weather_code,is_day',
+    temperature_unit: unit,
+  })
+  const weather = await fetchJson<{
+    current?: { temperature_2m?: number; weather_code?: number; is_day?: number }
+  }>(`https://api.open-meteo.com/v1/forecast?${params}`)
+
+  const temperature = weather.current?.temperature_2m
+  const weatherCode = weather.current?.weather_code
+  const isDay = weather.current?.is_day
+  if (
+    typeof temperature !== 'number' ||
+    typeof weatherCode !== 'number' ||
+    typeof isDay !== 'number'
+  ) {
+    throw new Error('Unable to determine weather')
+  }
+
+  const condition = conditionForWeatherCode(weatherCode, isDay === 1)
+  return `${WEATHER_ICONS[condition]} ${Math.round(temperature)}${unitSuffix(unit)}`
+}
+
 function renderHeader(width: number, phase: number, subtitleText: string) {
   const palette = getPalette()
   const asciiArt = getAsciiArt()
@@ -226,6 +321,11 @@ function renderHeader(width: number, phase: number, subtitleText: string) {
 export default function (pi: ExtensionAPI) {
   let requestRender: (() => void) | undefined
   let currentModelId = 'no model selected'
+  let weatherText: string | undefined
+
+  function subtitleText() {
+    return [currentModelId, projectName(), weatherText].filter(Boolean).join(' · ')
+  }
 
   function registerSettings() {
     pi.events.emit('pi-extension-settings:register', {
@@ -249,6 +349,20 @@ export default function (pi: ExtensionAPI) {
             'blue',
             'random',
           ] satisfies GradientSetting[],
+        },
+        {
+          id: 'weather',
+          label: 'Weather',
+          description: 'Show current weather in the ASCII header',
+          defaultValue: 'on',
+          values: ['on', 'off'],
+        },
+        {
+          id: 'temperatureUnit',
+          label: 'Temperature Unit',
+          description: 'Choose the temperature unit for current weather',
+          defaultValue: 'fahrenheit',
+          values: ['fahrenheit', 'celsius'] satisfies TemperatureUnit[],
         },
         {
           id: 'art',
@@ -275,7 +389,7 @@ export default function (pi: ExtensionAPI) {
       requestRender = () => tui.requestRender()
       return {
         render(width: number) {
-          return renderHeader(width, 0, `${currentModelId} · ${projectName()}`)
+          return renderHeader(width, 0, subtitleText())
         },
         invalidate() {
           tui.requestRender()
@@ -301,9 +415,21 @@ export default function (pi: ExtensionAPI) {
     sessionRandomGradientName = randomGradientName()
     sessionRandomArtName = randomArtName()
     currentModelId = ctx.model?.id ?? 'no model selected'
+    weatherText = undefined
     if (!ctx.hasUI) return
 
     applyHeaderSetting(ctx)
+
+    if (isEnabled() && isWeatherEnabled()) {
+      void fetchWeatherText(getTemperatureUnit())
+        .then((text) => {
+          weatherText = text
+          requestRender?.()
+        })
+        .catch(() => {
+          weatherText = undefined
+        })
+    }
   })
 
   pi.on('model_select', (event) => {
