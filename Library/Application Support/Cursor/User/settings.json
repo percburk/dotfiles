@@ -14,7 +14,7 @@
   "[csharp]": {
     "editor.defaultFormatter": "csharpier.csharpier-vscode",
     "editor.rulers": [120],
-    "editor.tabSize": 4 
+    "editor.tabSize": 4
   },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -221,7 +221,6 @@
   "prettier.semi": false,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
-  "redhat.telemetry.enabled": false,
   "remote.defaultExtensionsIfInstalledLocally": [
     "GitHub.copilot",
     "GitHub.copilot-chat",
@@ -236,19 +235,19 @@
   "typescript.autoClosingTags": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "update.showReleaseNotes": false,
+  "window.autoDetectColorScheme": false,
+  "window.commandCenter": true,
   "workbench.colorCustomizations": {
     "errorLens.errorForeground": "#a35c5ceb",
     "errorLens.warningForeground": "#d9a962eb",
     "errorLens.infoForeground": "#8db4d6eb",
     "errorLens.hintForeground": "#8db4d6eb"
   },
+  "workbench.colorTheme": "Ayu Dark",
   "workbench.editor.empty.hint": "hidden",
-  "workbench.sideBar.location": "right",
-  "workbench.startupEditor": "newUntitledFile",
-  "window.commandCenter": true,
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.productIconTheme": "fluent-icons",
-"workbench.colorTheme": "Ayu Dark",
-"window.autoDetectColorScheme": false,
-"workbench.agentsWindowButton.enabled": false
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.agentsWindowButton.enabled": false
 }
