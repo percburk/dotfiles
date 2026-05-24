@@ -99,8 +99,8 @@ alias cx="codex"
 alias cc="claude"
 
 # Dotfiles bare repo aliases
-alias cfg='/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias cfglg='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
+alias cfg="/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias cfglg="lazygit --git-dir=$HOME/.cfg --work-tree=$HOME"
 
 # Local machine-specific shell config, not tracked by dotfiles.
 if [[ -f "$HOME/.zshrc.local" ]]; then
