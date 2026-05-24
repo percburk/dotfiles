@@ -23,7 +23,8 @@
     "npm:@juanibiapina/pi-powerbar",
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-ask-user",
-    "npm:@catdaemon/pi-cmux"
+    "npm:@catdaemon/pi-cmux",
+    "npm:@juicesharp/rpiv-btw"
   ],
   "enabledModels": [
     "openai-codex/gpt-5.5",
@@ -34,3 +35,4 @@
     "openai-codex/gpt-5.2"
   ]
 }
+
