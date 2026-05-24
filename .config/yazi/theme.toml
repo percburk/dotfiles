@@ -1,3 +1,137 @@
-[flavor]
-dark = "ayu-dark"
+[mgr]
+# current working dir
+cwd = { fg = "#565b66" }
 
+# Hovered
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+
+# find
+find_keyword = { fg = "#73b8ff", bold = true, italic = true, underline = true }
+find_position = { fg = "#73b8ff", bold = true, italic = true }
+
+# Symlink
+symlink_target = { italic = true }
+
+# marker
+marker_copied = { fg = "#0b0e14", bg = "#aad94c" }
+marker_cut = { fg = "#0b0e14", bg = "#f07178" }
+marker_marked = { fg = "#0b0e14", bg = "#73b8ff" }
+marker_selected = { fg = "#0b0e14", bg = "#e6b450" }
+
+# count
+count_copied = { fg = "#0b0e14", bg = "#aad94c" }
+count_cut = { fg = "#565b66", bg = "#f07178" }
+count_selected = { fg = "#0b0e14", bg = "#e6b450" }
+
+# border
+border_symbol = " "
+
+[tabs]
+active   = { fg = "#0b0e14", bg = "#ff8f40", bold = true }
+inactive   = { fg = "#e6b450", bg = "#0b0e14" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "#0b0e14", bg = "#d2a6ff", bold = true }
+normal_alt = { fg = "#73b8ff", bg = "#1f2430", bold = true }
+
+select_main = { fg = "#0b0e14", bg = "#73b8ff", bold = true }
+select_alt = { fg = "#0b0e14", bg = "#73b8ff", bold = true }
+
+unset_main = { fg = "#0b0e14", bg = "#f07178", bold = true }
+unset_alt = { fg = "#0b0e14", bg = "#f07178", bold = true }
+
+[status]
+overall   = {}
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+# Progress
+progress_label = { fg = "#0b0e14", bold = true }
+progress_normal = { fg = "#d2a6ff", bg = "#0b0e14" }
+progress_error = { fg = "#f07178", bg = "#0b0e14" }
+
+# permissions
+perm_type = { fg = "#cccac2" }
+perm_write = { fg = "#f07178" }
+perm_exec = { fg = "#aad94c" }
+perm_read = { fg = "#73b8ff" }
+perm_sep = { fg = "#565b66" }
+
+[select]
+border = { fg = "#e6b450" }
+active = { fg = "#f07178", bold = true }
+inactive = { fg = "#565b66", bg = "#0b0e14" }
+
+[input]
+border = { fg = "#e6b450" }
+value = { fg = "#565b66" }
+
+[completion]
+border = { fg = "#e6b450", bg = "#0b0e14" }
+
+[tasks]
+border = { fg = "#e6b450" }
+title = { fg = "#565b66" }
+hovered = { fg = "#aad94c", underline = true }
+
+[which]
+cols = 3
+mask = { bg = "#0b0e14" }
+cand = { fg = "#e6b450" }
+rest = { fg = "#0b0e14" }
+desc = { fg = "#565b66" }
+separator = " • "
+separator_style = { fg = "#565b66" }
+
+[help]
+on = { fg = "#e6b450" }
+run = { fg = "#aad94c" }
+footer = { fg = "#0b0e14", bg = "#565b66" }
+
+[notify]
+title_info = { fg = "#aad94c" }
+title_warn = { fg = "#e6b450" }
+title_error = { fg = "#f07178" }
+
+[filetype]
+rules = [
+	# directories
+	{ url = "*/", fg = "#73b8ff" },
+
+	# executables
+	{ url = "*", is = "exec", fg = "#aad94c" },
+
+	# images
+	{ mime = "image/*", fg = "#e6b450" },
+
+	# media
+	{ mime = "{audio,video}/*", fg = "#aad94c" },
+
+	# archives
+	{ mime = "application/{,g}zip", fg = "#f07178" },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#f07178" },
+
+	# documents
+	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#73b8ff" },
+
+	# scripts and code
+	{ mime = "application/{x-shellscript,x-python,x-ruby,x-javascript}", fg = "#e6b450" },
+	{ mime = "text/x-{c,c++}", fg = "#73b8ff" },
+
+	# config files
+	{ url = "*.json", fg = "#e6b450" },
+	{ url = "*.yml", fg = "#73b8ff" },
+	{ url = "*.toml", fg = "#d2a6ff" },
+
+	# special files
+	{ url = "*", is = "orphan", bg = "#0b0e14" },
+
+	# dummy files
+	{ url = "*", is = "dummy", bg = "#0b0e14" },
+
+	# fallback
+	{ url = "*/", fg = "#73b8ff" },
+]
