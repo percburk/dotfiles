@@ -180,9 +180,8 @@ function gradientText(text: string, phase: number, palette: Rgb[]) {
 }
 
 function center(text: string, width: number) {
-  const length = [...text].length
-  if (length >= width) return text
-  return `${' '.repeat(Math.floor((width - length) / 2))}${text}`
+  if (text.length >= width) return text
+  return `${' '.repeat(Math.floor((width - text.length) / 2))}${text}`
 }
 
 function projectName() {
@@ -355,34 +354,45 @@ export default function (pi: ExtensionAPI) {
   let requestRender: (() => void) | undefined
   let currentModelId = 'no model selected'
   let weatherData: WeatherData | undefined
-  let weatherFetchInFlight = false
+  let weatherFetchIsInFlight = false
+  let weatherIsUnavailable = false
   let lastWeatherFetchAttempt = 0
 
   function ensureWeatherLoaded() {
-    if (!isWeatherEnabled() || weatherData || weatherFetchInFlight) return
+    if (!isWeatherEnabled() || weatherData || weatherFetchIsInFlight) return
     const now = Date.now()
-    if (lastWeatherFetchAttempt && now - lastWeatherFetchAttempt < WEATHER_RETRY_AFTER_MS) return
+    if (
+      lastWeatherFetchAttempt &&
+      now - lastWeatherFetchAttempt < WEATHER_RETRY_AFTER_MS
+    ) {
+      return
+    }
 
-    weatherFetchInFlight = true
+    weatherFetchIsInFlight = true
+    weatherIsUnavailable = false
     lastWeatherFetchAttempt = now
     void fetchWeatherData()
       .then((data) => {
         weatherData = data
-        requestRender?.()
+        weatherIsUnavailable = false
       })
       .catch(() => {
         weatherData = undefined
+        weatherIsUnavailable = true
       })
       .finally(() => {
-        weatherFetchInFlight = false
+        weatherFetchIsInFlight = false
+        requestRender?.()
       })
   }
 
   function weatherSubtitleText() {
     if (!isWeatherEnabled()) return undefined
     ensureWeatherLoaded()
-    if (!weatherData) return WEATHER_LOADING_TEXT
-    return formatWeatherText(weatherData, getTemperatureUnit())
+    if (weatherData) return formatWeatherText(weatherData, getTemperatureUnit())
+    if (weatherFetchIsInFlight) return WEATHER_LOADING_TEXT
+    if (weatherIsUnavailable) return undefined
+    return undefined
   }
 
   function piVersionSubtitleText() {
@@ -521,7 +531,8 @@ export default function (pi: ExtensionAPI) {
     sessionRandomArtName = randomArtName()
     currentModelId = ctx.model?.id ?? 'no model selected'
     weatherData = undefined
-    weatherFetchInFlight = false
+    weatherFetchIsInFlight = false
+    weatherIsUnavailable = false
     lastWeatherFetchAttempt = 0
     if (!ctx.hasUI) return
 
