@@ -50,19 +50,18 @@ fi
 worktree_root="$(cd "$worktree_path" && pwd -P)"
 workspace_name="$(basename "$worktree_root")"
 
-existing_workspace="$(cmux rpc workspace.list '{}' | python3 -c '
-import json
-import os
-import sys
+existing_workspace="$(
+  cmux rpc workspace.list '{}' |
+    jq -r '.workspaces[] | [.ref // .id, .current_directory // ""] | @tsv' |
+    while IFS=$'\t' read -r ref cwd; do
+      [[ -n "$ref" && -n "$cwd" && -d "$cwd" ]] || continue
 
-target = os.path.realpath(sys.argv[1])
-data = json.load(sys.stdin)
-for workspace in data.get("workspaces", []):
-    cwd = workspace.get("current_directory")
-    if cwd and os.path.realpath(cwd) == target:
-        print(workspace.get("ref") or workspace.get("id"))
+      if [[ "$(cd "$cwd" && pwd -P)" == "$worktree_root" ]]; then
+        printf '%s\n' "$ref"
         break
-' "$worktree_root")"
+      fi
+    done
+)"
 
 if [[ -n "$existing_workspace" ]]; then
   cmux select-workspace --workspace "$existing_workspace"
