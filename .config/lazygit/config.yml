@@ -21,6 +21,18 @@ customCommands:
         initialValue: ""
     command: "git worktree add ../{{ .Form.Name }} {{ .SelectedLocalBranch.Name }} -b {{ .Form.Name }}"
 
+  # Open cmux workspace for selected worktree (when in worktrees view)
+  - key: "O"
+    context: "worktrees"
+    description: "Open selected worktree in cmux"
+    command: "cmux-worktree path {{ .SelectedWorktree.Path | quote }}"
+
+  # Open cmux workspace for selected branch's worktree (when in branches view)
+  - key: "O"
+    context: "localBranches"
+    description: "Open selected branch worktree in cmux"
+    command: "cmux-worktree branch {{ .SelectedLocalBranch.Name | quote }}"
+
 gui:
   theme:
     activeBorderColor:
