@@ -434,7 +434,7 @@ export default function (pi: ExtensionAPI) {
         },
         {
           id: 'gradient',
-          label: 'Color Gradient',
+          label: 'Color gradient',
           description: 'Choose the color gradient for the welcome header',
           defaultValue: 'pink-purple',
           values: [
@@ -446,7 +446,7 @@ export default function (pi: ExtensionAPI) {
         },
         {
           id: 'piVersion',
-          label: 'Pi Version',
+          label: 'Pi version',
           description: 'Show the pi version in the welcome header',
           defaultValue: 'on',
           values: ['on', 'off'],
@@ -460,7 +460,7 @@ export default function (pi: ExtensionAPI) {
         },
         {
           id: 'cwd',
-          label: 'Current Directory',
+          label: 'Current directory',
           description: 'Show the current directory/project name in the welcome header',
           defaultValue: 'on',
           values: ['on', 'off'],
@@ -474,14 +474,14 @@ export default function (pi: ExtensionAPI) {
         },
         {
           id: 'temperatureUnit',
-          label: 'Temperature Unit',
+          label: 'Temperature unit',
           description: 'Choose the temperature unit for the weather widget',
           defaultValue: 'fahrenheit',
           values: ['fahrenheit', 'celsius'] satisfies TemperatureUnit[],
         },
         {
           id: 'art',
-          label: 'ASCII Art',
+          label: 'ASCII art',
           description: 'Choose the ASCII art for the welcome header',
           defaultValue: 'Rebel',
           values: [
