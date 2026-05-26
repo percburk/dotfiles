@@ -63,7 +63,6 @@ format = "→ [$symbol($version)]($style) "
 symbol = " "
 truncation_length = 25
 truncation_symbol = "…"
-ignore_branches = ["master", "main"]
 style = "blue"
 format = "→ [$symbol$branch]($style) "
 
