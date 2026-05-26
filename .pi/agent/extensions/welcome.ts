@@ -159,9 +159,9 @@ function sampleGradient(position: number, palette: Rgb[]) {
   const index = Math.floor(scaled)
   const nextIndex = (index + 1) % palette.length
   const t = scaled - index
-  const a = palette[index]!
-  const b = palette[nextIndex]!
-  return [mix(a[0], b[0], t), mix(a[1], b[1], t), mix(a[2], b[2], t)] as Rgb
+  const a = palette[index]
+  const b = palette[nextIndex]
+  return [mix(a[0], b[0], t), mix(a[1], b[1], t), mix(a[2], b[2], t)] satisfies Rgb
 }
 
 function fg([r, g, b]: Rgb, text: string) {
