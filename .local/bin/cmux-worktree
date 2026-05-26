@@ -50,18 +50,31 @@ fi
 worktree_root="$(cd "$worktree_path" && pwd -P)"
 workspace_name="$(basename "$worktree_root")"
 
-existing_workspace="$(
-  cmux rpc workspace.list '{}' |
-    jq -r '.workspaces[] | [.ref // .id, .current_directory // ""] | @tsv' |
-    while IFS=$'\t' read -r ref cwd; do
-      [[ -n "$ref" && -n "$cwd" && -d "$cwd" ]] || continue
+existing_workspace=""
+snapshot_json="$(cmux rpc extension.sidebar.snapshot '{}' 2>/dev/null || true)"
 
-      if [[ "$(cd "$cwd" && pwd -P)" == "$worktree_root" ]]; then
-        printf '%s\n' "$ref"
-        break
-      fi
-    done
-)"
+if [[ -n "$snapshot_json" ]]; then
+  existing_workspace="$(
+    {
+      jq -r '
+        (.workspaces // [])[]
+        | (.ref // .id // "") as $ref
+        | (.panel_directories // [])[]?
+        | select(type == "string" and length > 0)
+        | [$ref, .]
+        | @tsv
+      ' <<<"$snapshot_json" 2>/dev/null || true
+    } |
+      while IFS=$'\t' read -r ref cwd; do
+        [[ -n "$ref" && -n "$cwd" && -d "$cwd" ]] || continue
+
+        if [[ "$(cd "$cwd" && pwd -P)" == "$worktree_root" ]]; then
+          printf '%s\n' "$ref"
+          break
+        fi
+      done
+  )"
+fi
 
 if [[ -n "$existing_workspace" ]]; then
   cmux select-workspace --workspace "$existing_workspace"
