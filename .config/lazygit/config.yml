@@ -33,6 +33,12 @@ customCommands:
     description: "Open selected branch worktree in cmux"
     command: "cmux-worktree branch {{ .SelectedLocalBranch.Name | quote }}"
 
+  # Open cmux workspace for current worktree (when in files view)
+  - key: "O"
+    context: "files"
+    description: "Open current worktree in cmux"
+    command: "cmux-worktree path \"$(git rev-parse --show-toplevel)\""
+
 gui:
   theme:
     activeBorderColor:

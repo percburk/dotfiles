@@ -364,12 +364,12 @@ default_layout "ayu-dark"
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 //
-layout_dir "/Users/kevinburk/.config/zellij/layouts"
+// layout_dir "/path/to/my/layout_dir"
 
 // The folder in which Zellij will look for themes
 // (Requires restart)
 //
-theme_dir "/Users/kevinburk/.config/zellij/themes"
+// theme_dir "/path/to/my/theme_dir"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
