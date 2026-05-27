@@ -1,11 +1,10 @@
 {
-  // Settings I actually touch
+  "workbench.colorTheme": "Ayu Dark",
   "editor.fontFamily": "GeistMono Nerd Font",
   "editor.fontSize": 13,
-  "editor.fontLigatures": false,
   "terminal.integrated.fontFamily": "GeistMono Nerd Font",
   "terminal.integrated.fontSize": 13,
-  // OK that's pretty much it
+
   "[aspnetcorerazor]": {
     "editor.defaultFormatter": "csharpier.csharpier-vscode",
     "editor.rulers": [120],
@@ -170,6 +169,7 @@
   "editor.bracketPairColorization.enabled": false,
   "editor.cursorBlinking": "smooth",
   "editor.detectIndentation": false,
+  "editor.fontLigatures": false,
   "editor.inlineSuggest.enabled": true,
   "editor.linkedEditing": true,
   "editor.minimap.autohide": true,
@@ -243,7 +243,6 @@
     "errorLens.infoForeground": "#8db4d6eb",
     "errorLens.hintForeground": "#8db4d6eb"
   },
-  "workbench.colorTheme": "Ayu Dark",
   "workbench.editor.empty.hint": "hidden",
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.productIconTheme": "fluent-icons",
