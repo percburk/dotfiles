@@ -1,35 +1,36 @@
 // Place your key bindings in this file to override the defaults
 [
-    {
-        "key": "cmd+i",
-        "command": "composerMode.agent"
-    },
-    {
-      "key": "cmd+i",
-      "command": "aichat.newchataction"
-    },
-    {
-      "key": "cmd+l",
-      "command": "-aichat.newchataction"
-    },
-    {
-      "key": "cmd+i",
-      "command": "composer.sendToAgent",
-      "when": "editorHasPromptBar && editorPromptBarFocused"
-    },
-    {
-      "key": "cmd+l",
-      "command": "-composer.sendToAgent",
-      "when": "editorHasPromptBar && editorPromptBarFocused"
-    },
-    {
-      "key": "cmd+l",
-      "command": "expandLineSelection",
-      "when": "textInputFocus"
-    },
-    {
-      "key": "cmd+p",
-      "command": "-expandLineSelection",
-      "when": "textInputFocus"
-    }
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "cmd+i",
+    "command": "aichat.newchataction"
+  },
+  {
+    "key": "cmd+l",
+    "command": "-aichat.newchataction"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composer.sendToAgent",
+    "when": "editorHasPromptBar && editorPromptBarFocused"
+  },
+  {
+    "key": "cmd+l",
+    "command": "-composer.sendToAgent",
+    "when": "editorHasPromptBar && editorPromptBarFocused"
+  },
+  {
+    "key": "cmd+l",
+    "command": "expandLineSelection",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "cmd+p",
+    "command": "-expandLineSelection",
+    "when": "textInputFocus"
+  }
 ]
+
