@@ -16,6 +16,19 @@ import { type SettingDefinition } from '../npm/node_modules/@juanibiapina/pi-ext
 
 const EXTENSION_NAME = 'delta-diff'
 const DELTA_TIMEOUT_MS = 5_000
+const MIN_DELTA_WIDTH = 40
+
+const LEFT_TOOL_SUCCESS_GUTTER_WIDTH = 1
+const LEFT_TERMINAL_GAP_WIDTH = 1
+const RIGHT_TERMINAL_GAP_WIDTH = 1
+const DELTA_RENDER_GUTTER_WIDTH =
+  LEFT_TOOL_SUCCESS_GUTTER_WIDTH +
+  LEFT_TERMINAL_GAP_WIDTH +
+  RIGHT_TERMINAL_GAP_WIDTH
+const DELTA_PROCESS_WIDTH_OFFSET = 4
+
+const TRAILING_CLEAR_TO_EOL_RE = /(\x1b\[(?:0)?K(?:\x1b\[[0-9;]*m)*)$/
+const LEADING_BLANK_LINES_RE = /^(?:\r?\n)+/
 
 const BASE_DELTA_ARGS = [
   '--dark',
@@ -26,9 +39,18 @@ const BASE_DELTA_ARGS = [
 ]
 
 type DeltaEditDetails = EditToolDetails & {
+  patch?: string
   delta?: string
   deltaError?: string
 }
+
+type ToolBgName = 'toolPendingBg' | 'toolSuccessBg' | 'toolErrorBg'
+type ToolTheme = {
+  bg(color: ToolBgName, text: string): string
+  fg(color: 'toolTitle' | 'accent', text: string): string
+  bold(text: string): string
+}
+type ToolStatus = { isPartial: boolean; isError: boolean }
 
 function isEnabled() {
   return getSetting(EXTENSION_NAME, 'enabled', 'on') === 'on'
@@ -41,7 +63,7 @@ function isSideBySideEnabled() {
 function getDeltaWidth() {
   const columns = process.stdout.columns ?? Number(process.env.COLUMNS)
   if (!Number.isFinite(columns) || columns <= 0) return undefined
-  return Math.max(40, Math.floor(columns) - 4)
+  return Math.max(MIN_DELTA_WIDTH, Math.floor(columns) - DELTA_PROCESS_WIDTH_OFFSET)
 }
 
 function getDeltaArgs(width?: number) {
@@ -83,10 +105,28 @@ function padDeltaLine(line: string, width: number) {
   // toolSuccessBg color. Insert the padding immediately before delta's trailing
   // clear-to-EOL sequence instead, so the spaces inherit delta's green/red diff
   // background and the parent Box sees the line as already full width.
-  const clearToEnd = line.match(/(\x1b\[(?:0)?K(?:\x1b\[[0-9;]*m)*)$/)
-  if (!clearToEnd?.index) return line + padding
+  const clearToEnd = TRAILING_CLEAR_TO_EOL_RE.exec(line)
+  if (clearToEnd?.index === undefined) return line + padding
 
   return `${line.slice(0, clearToEnd.index)}${padding}${clearToEnd[0]}`
+}
+
+function getDeltaContentWidth(width: number) {
+  return Math.max(1, width - DELTA_RENDER_GUTTER_WIDTH)
+}
+
+function renderDeltaContentLine(rawLine: string, width: number) {
+  const line = truncateToWidth(rawLine, width, '')
+  return padDeltaLine(line, width)
+}
+
+function renderDeltaGutters(edgeBg: (text: string) => string) {
+  return {
+    left:
+      edgeBg(' '.repeat(LEFT_TOOL_SUCCESS_GUTTER_WIDTH)) +
+      ' '.repeat(LEFT_TERMINAL_GAP_WIDTH),
+    right: ' '.repeat(RIGHT_TERMINAL_GAP_WIDTH),
+  }
 }
 
 class DeltaDiffText implements Component {
@@ -101,22 +141,23 @@ class DeltaDiffText implements Component {
   invalidate() {}
 
   render(width: number) {
-    const leftSuccess = this.edgeBg(' ')
-    const leftTerminal = width >= 2 ? ' ' : ''
-    const rightTerminal = width >= 3 ? ' ' : ''
-    const deltaWidth = Math.max(
-      1,
-      width -
-        visibleWidth(leftSuccess) -
-        visibleWidth(leftTerminal) -
-        visibleWidth(rightTerminal)
-    )
+    const deltaWidth = getDeltaContentWidth(width)
+    const { left, right } = renderDeltaGutters(this.edgeBg)
 
-    return this.text.split('\n').map((rawLine) => {
-      const line = truncateToWidth(rawLine, deltaWidth, '')
-      return `${leftSuccess}${leftTerminal}${padDeltaLine(line, deltaWidth)}${rightTerminal}`
-    })
+    return this.text.split('\n').map((rawLine) => (
+      `${left}${renderDeltaContentLine(rawLine, deltaWidth)}${right}`
+    ))
   }
+}
+
+function bg(theme: ToolTheme, color: ToolBgName) {
+  return (text: string) => theme.bg(color, text)
+}
+
+function getToolBg(theme: ToolTheme, status: ToolStatus) {
+  if (status.isPartial) return bg(theme, 'toolPendingBg')
+  if (status.isError) return bg(theme, 'toolErrorBg')
+  return bg(theme, 'toolSuccessBg')
 }
 
 function shortPath(input: unknown) {
@@ -126,8 +167,17 @@ function shortPath(input: unknown) {
   return input
 }
 
+function getEditPathDisplay(args: unknown) {
+  const editArgs = args as { path?: unknown; file_path?: unknown } | undefined
+  return shortPath(editArgs?.path) ?? shortPath(editArgs?.file_path) ?? '...'
+}
+
 function deltaErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : String(error)
+}
+
+function normalizeDeltaOutput(output: string) {
+  return output.replace(LEADING_BLANK_LINES_RE, '').trimEnd()
 }
 
 async function runDelta(patch: string, signal?: AbortSignal): Promise<string> {
@@ -189,7 +239,7 @@ async function runDelta(patch: string, signal?: AbortSignal): Promise<string> {
     child.on('close', (code) => {
       if (settled) return
       if (code === 0) {
-        settle(() => resolve(stdout.replace(/^(?:\r?\n)+/, '').trimEnd()))
+        settle(() => resolve(normalizeDeltaOutput(stdout)))
       } else {
         settle(() =>
           reject(new Error(stderr.trim() || `delta exited with code ${code}`))
@@ -247,31 +297,20 @@ export default function (pi: ExtensionAPI) {
           )
         }
 
-        const path =
-          shortPath(
-            (args as { path?: unknown; file_path?: unknown } | undefined)?.path
-          ) ??
-          shortPath(
-            (args as { path?: unknown; file_path?: unknown } | undefined)?.file_path
-          ) ??
-          '...'
-
+        const path = getEditPathDisplay(args)
         const title = theme.fg('toolTitle', theme.bold('edit'))
         const pathText = theme.fg('accent', path)
-        const bg = context.isPartial
-          ? (text: string) => theme.bg('toolPendingBg', text)
-          : context.isError
-            ? (text: string) => theme.bg('toolErrorBg', text)
-            : (text: string) => theme.bg('toolSuccessBg', text)
-        return new Text(`${title} ${pathText}`, 1, 1, bg)
+        return new Text(`${title} ${pathText}`, 1, 1, getToolBg(theme, context))
       },
       renderResult(result, options, theme, context) {
         const details = result.details as DeltaEditDetails | undefined
 
         if (isEnabled() && details?.delta) {
-          return new DeltaDiffText(details.delta, (text) =>
-            theme.bg('toolSuccessBg', text)
-          )
+          return new DeltaDiffText(details.delta, bg(theme, 'toolSuccessBg'))
+        }
+
+        if (isEnabled() && details?.deltaError) {
+          return new Text(details.deltaError, 1, 1, bg(theme, 'toolErrorBg'))
         }
 
         return base.renderResult?.(result, options, theme, context) ?? new Text('')
