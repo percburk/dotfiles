@@ -22,19 +22,16 @@ const LEFT_TOOL_SUCCESS_GUTTER_WIDTH = 1
 const LEFT_TERMINAL_GAP_WIDTH = 1
 const RIGHT_TERMINAL_GAP_WIDTH = 1
 const DELTA_RENDER_GUTTER_WIDTH =
-  LEFT_TOOL_SUCCESS_GUTTER_WIDTH +
-  LEFT_TERMINAL_GAP_WIDTH +
-  RIGHT_TERMINAL_GAP_WIDTH
+  LEFT_TOOL_SUCCESS_GUTTER_WIDTH + LEFT_TERMINAL_GAP_WIDTH + RIGHT_TERMINAL_GAP_WIDTH
 const DELTA_PROCESS_WIDTH_OFFSET = 4
 
-const TRAILING_CLEAR_TO_EOL_RE = /(\x1b\[(?:0)?K(?:\x1b\[[0-9;]*m)*)$/
-const LEADING_BLANK_LINES_RE = /^(?:\r?\n)+/
+const TRAILING_CLEAR_TO_EOL_REGEX = /(\x1b\[(?:0)?K(?:\x1b\[[0-9;]*m)*)$/
+const LEADING_BLANK_LINES_REGEX = /^(?:\r?\n)+/
 
 const BASE_DELTA_ARGS = [
   '--dark',
   '--paging=never',
   '--line-numbers',
-  '--hyperlinks',
   '--file-style=omit',
 ]
 
@@ -94,7 +91,8 @@ function registerSettings(pi: ExtensionAPI) {
   })
 }
 
-function padDeltaLine(line: string, width: number) {
+function renderDeltaContentLine(rawLine: string, width: number) {
+  const line = truncateToWidth(rawLine, width, '')
   const padding = ' '.repeat(Math.max(0, width - visibleWidth(line)))
   if (!padding) return line
 
@@ -105,19 +103,10 @@ function padDeltaLine(line: string, width: number) {
   // toolSuccessBg color. Insert the padding immediately before delta's trailing
   // clear-to-EOL sequence instead, so the spaces inherit delta's green/red diff
   // background and the parent Box sees the line as already full width.
-  const clearToEnd = TRAILING_CLEAR_TO_EOL_RE.exec(line)
+  const clearToEnd = TRAILING_CLEAR_TO_EOL_REGEX.exec(line)
   if (clearToEnd?.index === undefined) return line + padding
 
   return `${line.slice(0, clearToEnd.index)}${padding}${clearToEnd[0]}`
-}
-
-function getDeltaContentWidth(width: number) {
-  return Math.max(1, width - DELTA_RENDER_GUTTER_WIDTH)
-}
-
-function renderDeltaContentLine(rawLine: string, width: number) {
-  const line = truncateToWidth(rawLine, width, '')
-  return padDeltaLine(line, width)
 }
 
 function renderDeltaGutters(edgeBg: (text: string) => string) {
@@ -141,12 +130,12 @@ class DeltaDiffText implements Component {
   invalidate() {}
 
   render(width: number) {
-    const deltaWidth = getDeltaContentWidth(width)
     const { left, right } = renderDeltaGutters(this.edgeBg)
+    const deltaWidth = Math.max(1, width - DELTA_RENDER_GUTTER_WIDTH)
 
-    return this.text.split('\n').map((rawLine) => (
-      `${left}${renderDeltaContentLine(rawLine, deltaWidth)}${right}`
-    ))
+    return this.text
+      .split('\n')
+      .map((rawLine) => `${left}${renderDeltaContentLine(rawLine, deltaWidth)}${right}`)
   }
 }
 
@@ -177,7 +166,7 @@ function deltaErrorMessage(error: unknown) {
 }
 
 function normalizeDeltaOutput(output: string) {
-  return output.replace(LEADING_BLANK_LINES_RE, '').trimEnd()
+  return output.replace(LEADING_BLANK_LINES_REGEX, '').trimEnd()
 }
 
 async function runDelta(patch: string, signal?: AbortSignal): Promise<string> {
