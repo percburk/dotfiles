@@ -14,5 +14,9 @@
 		"piVersion": "on",
 		"model": "on",
 		"cwd": "on"
+	},
+	"delta-diff": {
+		"enabled": "on",
+		"sideBySide": "on"
 	}
 }
