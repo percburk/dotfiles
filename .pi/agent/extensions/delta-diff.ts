@@ -5,20 +5,19 @@ import {
   type ExtensionAPI,
   type ExtensionContext,
 } from '@earendil-works/pi-coding-agent'
-import { Text, truncateToWidth, visibleWidth, type Component } from '@earendil-works/pi-tui'
+import {
+  Text,
+  truncateToWidth,
+  visibleWidth,
+  type Component,
+} from '@earendil-works/pi-tui'
 import { getSetting } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/storage.ts'
 import { type SettingDefinition } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/types.ts'
 
 const EXTENSION_NAME = 'delta-diff'
 const DELTA_TIMEOUT_MS = 5_000
 
-const BASE_DELTA_ARGS = [
-  '--dark',
-  '--paging=never',
-  '--line-numbers',
-  '--hyperlinks',
-]
-
+const BASE_DELTA_ARGS = ['--dark', '--paging=never', '--line-numbers', '--hyperlinks']
 
 type DeltaEditDetails = EditToolDetails & {
   delta?: string
@@ -51,7 +50,8 @@ function registerSettings(pi: ExtensionAPI) {
       {
         id: 'enabled',
         label: 'Enabled',
-        description: 'Render edit diffs with delta instead of pi\'s built-in diff renderer',
+        description:
+          "Render edit diffs with delta instead of pi's built-in diff renderer",
         defaultValue: 'on',
         values: ['on', 'off'],
       },
@@ -159,7 +159,9 @@ async function runDelta(patch: string, signal?: AbortSignal): Promise<string> {
       if (code === 0) {
         settle(() => resolve(stdout.trimEnd()))
       } else {
-        settle(() => reject(new Error(stderr.trim() || `delta exited with code ${code}`)))
+        settle(() =>
+          reject(new Error(stderr.trim() || `delta exited with code ${code}`))
+        )
       }
     })
 
@@ -208,12 +210,20 @@ export default function (pi: ExtensionAPI) {
 
       renderCall(args, theme, context) {
         if (!isEnabled()) {
-          return base.renderCall?.(args, theme, context) ?? new Text(theme.fg('toolTitle', theme.bold('edit')), 0, 0)
+          return (
+            base.renderCall?.(args, theme, context) ??
+            new Text(theme.fg('toolTitle', theme.bold('edit')), 0, 0)
+          )
         }
 
-        const path = shortPath((args as { path?: unknown; file_path?: unknown } | undefined)?.path)
-          ?? shortPath((args as { path?: unknown; file_path?: unknown } | undefined)?.file_path)
-          ?? '...'
+        const path =
+          shortPath(
+            (args as { path?: unknown; file_path?: unknown } | undefined)?.path
+          ) ??
+          shortPath(
+            (args as { path?: unknown; file_path?: unknown } | undefined)?.file_path
+          ) ??
+          '...'
 
         const title = theme.fg('toolTitle', theme.bold('edit'))
         const pathText = theme.fg('accent', path)
@@ -229,7 +239,9 @@ export default function (pi: ExtensionAPI) {
         const details = result.details as DeltaEditDetails | undefined
 
         if (isEnabled() && details?.delta) {
-          return new DeltaDiffText(details.delta, (text) => theme.bg('toolSuccessBg', text))
+          return new DeltaDiffText(details.delta, (text) =>
+            theme.bg('toolSuccessBg', text)
+          )
         }
 
         return base.renderResult?.(result, options, theme, context) ?? new Text('')
