@@ -8,16 +8,11 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 # Init Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Shared PATH entries
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3/libexec/bin:$PATH"
-
 # Shared tool config
 export EDITOR="nvim"
 export EZA_CONFIG_DIR="$HOME/.config/eza"
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+export ZELLIJ_SOCKET_DIR="/tmp/zellij"
 
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
@@ -70,10 +65,9 @@ alias sourcetree="open -a Sourcetree"
 alias helium="open -a Helium"
 
 # Config file aliases
-alias zshconfig="cursor ~/.zshrc"
-alias starshipconfig="cursor ~/.config/starship.toml"
-alias cursorconfig="cursor ~/Library/Application\ Support/Cursor/User/settings.json"
-alias ghosttyconfig="cursor ~/.config/ghostty/config"
+alias zshconfig="nvim ~/.zshrc"
+alias starshipconfig="nvim ~/.config/starship.toml"
+alias ghosttyconfig="nvim ~/.config/ghostty/config"
 
 # Git aliases
 alias gs="git status"
