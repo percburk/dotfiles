@@ -1,73 +1,75 @@
 customCommands:
   # Create worktree from current branch (when in worktrees view)
-  - key: "N"
-    context: "worktrees"
-    description: "Create new worktree from current branch"
+  - key: 'N'
+    context: 'worktrees'
+    description: 'Create new worktree from current branch'
     prompts:
-      - type: "input"
-        title: "Create a new worktree from {{ .CheckedOutBranch.Name }} with what name?"
-        key: "Name"
-        initialValue: ""
-    command: "git worktree add ../{{ .Form.Name }} {{ .CheckedOutBranch.Name }} -b {{ .Form.Name }}"
+      - type: 'input'
+        title: 'Create a new worktree from {{ .CheckedOutBranch.Name }} with what name?'
+        key: 'Name'
+        initialValue: ''
+    command: 'git worktree add ../{{ .Form.Name }} {{ .CheckedOutBranch.Name }} -b {{ .Form.Name }}'
 
   # Create worktree from selected branch (when in branches view)
-  - key: "N"
-    context: "localBranches"
-    description: "Create new worktree from selected branch"
+  - key: 'N'
+    context: 'localBranches'
+    description: 'Create new worktree from selected branch'
     prompts:
-      - type: "input"
-        title: "Create a new worktree from {{ .SelectedLocalBranch.Name }} with what name?"
-        key: "Name"
-        initialValue: ""
-    command: "git worktree add ../{{ .Form.Name }} {{ .SelectedLocalBranch.Name }} -b {{ .Form.Name }}"
+      - type: 'input'
+        title: 'Create a new worktree from {{ .SelectedLocalBranch.Name }} with what name?'
+        key: 'Name'
+        initialValue: ''
+    command: 'git worktree add ../{{ .Form.Name }} {{ .SelectedLocalBranch.Name }} -b {{ .Form.Name }}'
 
   # Open cmux workspace for selected worktree (when in worktrees view)
-  - key: "O"
-    context: "worktrees"
-    description: "Open selected worktree in cmux"
-    command: "cmux-worktree path {{ .SelectedWorktree.Path | quote }}"
+  - key: 'O'
+    context: 'worktrees'
+    description: 'Open selected worktree in cmux'
+    command: 'cmux-worktree path {{ .SelectedWorktree.Path | quote }}'
 
   # Open cmux workspace for selected branch's worktree (when in branches view)
-  - key: "O"
-    context: "localBranches"
-    description: "Open selected branch worktree in cmux"
-    command: "cmux-worktree branch {{ .SelectedLocalBranch.Name | quote }}"
+  - key: 'O'
+    context: 'localBranches'
+    description: 'Open selected branch worktree in cmux'
+    command: 'cmux-worktree branch {{ .SelectedLocalBranch.Name | quote }}'
 
   # Open cmux workspace for current worktree (when in files view)
-  - key: "O"
-    context: "files"
-    description: "Open current worktree in cmux"
-    command: "cmux-worktree path \"$(git rev-parse --show-toplevel)\""
+  - key: 'O'
+    context: 'files'
+    description: 'Open current worktree in cmux'
+    command: 'cmux-worktree path "$(git rev-parse --show-toplevel)"'
 
 gui:
+  nerdFontsVersion: '3'
+  showFileIcons: true
   theme:
     activeBorderColor:
-      - "#a6e3a1"
+      - '#a6e3a1'
       - bold
     inactiveBorderColor:
-      - "#a6adc8"
+      - '#a6adc8'
     searchingActiveBorderColor:
-      - "#f9e2af"
+      - '#f9e2af'
     optionsTextColor:
-      - "#89b4fa"
+      - '#89b4fa'
     selectedLineBgColor:
-      - "#181D26"
+      - '#181D26'
     inactiveViewSelectedLineBgColor:
-      - "#6c7086"
+      - '#6c7086'
     cherryPickedCommitFgColor:
-      - "#a6e3a1"
+      - '#a6e3a1'
     cherryPickedCommitBgColor:
-      - "#45475a"
+      - '#45475a'
     markedBaseCommitFgColor:
-      - "#89b4fa"
+      - '#89b4fa'
     markedBaseCommitBgColor:
-      - "#f9e2af"
+      - '#f9e2af'
     unstagedChangesColor:
-      - "#f38ba8"
+      - '#f38ba8'
     defaultFgColor:
-      - "#cdd6f4"
+      - '#cdd6f4'
   authorColors:
-    "*": "#b4befe"
+    '*': '#b4befe'
 git:
   pagers:
     - colorArg: always

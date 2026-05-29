@@ -2,6 +2,10 @@
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# Native zsh vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
 # Init Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -27,9 +31,11 @@ compinit -d "$HOME/.zcompdump"
 
 # fzf shell integration
 source <(fzf --zsh)
+source "$HOME/.config/fzf/config.zsh"
 
 # fzf-tab
 source "$HOMEBREW_PREFIX/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+source "$HOME/.config/fzf-tab/config.zsh"
 
 # zsh-autosuggestions
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"

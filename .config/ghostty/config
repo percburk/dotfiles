@@ -52,7 +52,6 @@ background-blur = 3
 background-opacity = 1
 confirm-close-surface = false
 cursor-click-to-move = true
-cursor-style = bar
 font-family = Geist Mono
 font-feature = -calt, -liga, -dlig
 font-size = 13
