@@ -2,6 +2,10 @@
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# Native zsh vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
 # Init Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
