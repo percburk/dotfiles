@@ -31,9 +31,11 @@ compinit -d "$HOME/.zcompdump"
 
 # fzf shell integration
 source <(fzf --zsh)
+source "$HOME/.config/fzf/config.zsh"
 
 # fzf-tab
 source "$HOMEBREW_PREFIX/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+source "$HOME/.config/fzf-tab/config.zsh"
 
 # zsh-autosuggestions
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
