@@ -1,28 +1,24 @@
 {
   "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
   "schemaVersion": 1,
-
   "app": {
     "appearance": "dark",
     "appIcon": "dark",
     "minimalMode": true,
     "warnBeforeQuit": false
   },
-
   "browser": {
     "defaultSearchEngine": "duckduckgo",
     "theme": "dark",
     "openTerminalLinksInCmuxBrowser": false,
     "interceptTerminalOpenCommandInCmuxBrowser": false
   },
-
   "sidebar": {
     "branchLayout": "vertical",
     "hideAllDetails": false,
     "openPortLinksInCmuxBrowser": false,
     "openPullRequestLinksInCmuxBrowser": false
   },
-
   "sidebarAppearance": {
     "matchTerminalBackground": true,
     "tintColor": "#000000",
@@ -33,11 +29,9 @@
     "selectionColor": "#181D26",
     "notificationBadgeColor": "#FF8F40"
   },
-
   "notifications": {
     "sound": "default"
   },
-
   "shortcuts": {
     "bindings": {
       "showHideAllWindows": "cmd+ctrl+opt+,"
