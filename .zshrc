@@ -1,7 +1,4 @@
-# oh-my-zsh and plugin settings
-DISABLE_AUTO_UPDATE="true"
-DISABLE_MAGIC_FUNCTIONS="true"
-DISABLE_LS_COLORS="true"
+# zsh plugin settings
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
@@ -14,10 +11,6 @@ export EZA_CONFIG_DIR="$HOME/.config/eza"
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 export ZELLIJ_SOCKET_DIR="/tmp/zellij"
 
-# oh-my-zsh
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_COMPDUMP="$HOME/.zcompdump"
-
 # Init fnm node version manager
 eval "$(fnm env --use-on-cd --shell zsh)"
 
@@ -26,15 +19,23 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 #   eval "$(zellij setup --generate-auto-start zsh)"
 # fi
 
-# Add autocomplete, fzf, and syntax highlighting out of Warp since these are built-in
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-  plugins=(fzf-tab git zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode)
-else
-  plugins=(git)
-fi
+# Native zsh completion; required for fzf-tab
+autoload -Uz compinit
+zstyle ':completion:*' menu no
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+compinit -d "$HOME/.zcompdump"
 
-# Init omz
-source "$ZSH/oh-my-zsh.sh"
+# fzf shell integration
+source <(fzf --zsh)
+
+# fzf-tab
+source "$HOMEBREW_PREFIX/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
+
+# zsh-autosuggestions
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# zoxide smart cd
+eval "$(zoxide init zsh)"
 
 # unset eza color overrides so theme.yml controls colors
 unset LS_COLORS
@@ -100,3 +101,6 @@ alias cfglg="lazygit --git-dir=$HOME/.cfg --work-tree=$HOME"
 if [[ -f "$HOME/.zshrc.local" ]]; then
   source "$HOME/.zshrc.local"
 fi
+
+# zsh-syntax-highlighting should be sourced last
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
