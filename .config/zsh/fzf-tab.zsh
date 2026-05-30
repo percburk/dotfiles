@@ -11,7 +11,7 @@ FZF_TAB_GROUP_COLORS=(
   $'\033[38;2;203;204;198m' # fg+ / bright fg
 )
 
-# Color only fzf-tab's group prefix, then reset so fzf's colors control the rest
+# color only fzf-tab's group prefix, then reset so fzf's colors control the rest
 zstyle ':fzf-tab:*' prefix $'·\033[00m'
 zstyle ':fzf-tab:*' group-colors $FZF_TAB_GROUP_COLORS
 zstyle ':fzf-tab:*' default-color ''
