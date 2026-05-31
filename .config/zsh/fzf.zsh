@@ -20,10 +20,10 @@ export FZF_DEFAULT_OPTS=$'
   --preview-window=right:65%:wrap:border-left
 '
 
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --strip-cwd-prefix'  # strip-cwd-prefix removes the leading ./ from results
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --strip-cwd-prefix"  # strip-cwd-prefix removes the leading ./ from results
 
-# Ctrl-T uses fd
+# ctrl-t uses fd
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export _FZF_PREVIEW_CMD='bat --color=always --style=plain,numbers --line-range=:500 {}'
+export _FZF_PREVIEW_CMD="bat --color=always --style=plain,numbers --line-range=:500 {}"
 export FZF_CTRL_T_OPTS="--preview '$_FZF_PREVIEW_CMD'"

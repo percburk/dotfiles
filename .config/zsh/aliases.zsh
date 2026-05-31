@@ -38,7 +38,7 @@ alias startp="brew services start postgresql@14"
 alias stopp="brew services stop postgresql@14"
 
 # eza aliases
-alias ls="eza -a --icons"
+alias ls="eza -a1 --icons"
 alias la="eza -la --icons --git"
 alias lsa="eza -la --icons --git"
 alias tree="eza --tree --icons"
