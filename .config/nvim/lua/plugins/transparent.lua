@@ -5,6 +5,10 @@ return {
       extra_groups = {
         "NormalFloat",
         "NvimTreeNormal",
+        "WinSeparator",
+        "VertSplit",
+        "BufferLineFill",
+        "TabLineFill",
       },
     },
   },
