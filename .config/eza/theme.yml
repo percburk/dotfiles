@@ -89,7 +89,7 @@ file_type:
   build: { foreground: '#aad94c' }
   source: { foreground: '#d2a6ff' }
 
-punctuation: { foreground: '#202229' }
+punctuation: { foreground: '#565b66' }
 date: { foreground: '#ffb454' }
 inode: { foreground: '#bfbdb6' }
 blocks: { foreground: '#bfbdb6' }

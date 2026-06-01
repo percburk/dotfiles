@@ -48,7 +48,7 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-background-blur = 4
+background-blur = 3
 background-opacity = 0.92
 confirm-close-surface = false
 cursor-click-to-move = true
