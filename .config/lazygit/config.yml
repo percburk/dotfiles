@@ -39,6 +39,24 @@ customCommands:
     description: 'Open current worktree in cmux'
     command: 'cmux-worktree path "$(git rev-parse --show-toplevel)"'
 
+  # Open Zellij tab for selected worktree (when in worktrees view)
+  - key: 'Z'
+    context: 'worktrees'
+    description: 'Open selected worktree in Zellij'
+    command: 'zellij-worktree path {{ .SelectedWorktree.Path | quote }}'
+
+  # Open Zellij tab for selected branch's worktree (when in branches view)
+  - key: 'Z'
+    context: 'localBranches'
+    description: 'Open selected branch worktree in Zellij'
+    command: 'zellij-worktree branch {{ .SelectedLocalBranch.Name | quote }}'
+
+  # Open Zellij tab for current worktree (when in files view)
+  - key: 'Z'
+    context: 'files'
+    description: 'Open current worktree in Zellij'
+    command: 'zellij-worktree path "$(git rev-parse --show-toplevel)"'
+
 gui:
   nerdFontsVersion: '3'
   showFileIcons: true
