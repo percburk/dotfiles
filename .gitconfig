@@ -1,0 +1,39 @@
+[include]
+    path = ~/.config/delta/themes.gitconfig
+[include]
+    path = ~/.gitconfig.local
+[core]
+    excludesfile = ~/.gitignore_global
+    pager = delta
+[push]
+    autoSetupRemote = true
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[pull]
+    rebase = false
+[credential "https://github.com"]
+    helper = 
+  helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = 
+    helper = !/opt/homebrew/bin/gh auth git-credential
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    dark = true
+    line-numbers = true
+    features = ayu-dark
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$REMOTE"
+[merge]
+    conflictStyle = zdiff3
+    tool = nvimdiff
+[mergetool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$MERGED" "$REMOTE" "$BASE" -c 'wincmd J' -c 'wincmd ='
+    trustExitCode = true
