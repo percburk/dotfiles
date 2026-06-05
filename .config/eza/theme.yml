@@ -5,10 +5,10 @@ filekinds:
   normal: { foreground: '#ece8db' }
   directory: { foreground: '#59c2ff' }
   symlink: { foreground: '#95e6cb' }
-  pipe: { foreground: '#202229' }
+  pipe: { foreground: '#565b66' }
   block_device: { foreground: '#ffb454' }
   char_device: { foreground: '#ffb454' }
-  socket: { foreground: '#202229' }
+  socket: { foreground: '#565b66' }
   special: { foreground: '#d2a6ff' }
   executable: { foreground: '#aad94c' }
   mount_point: { foreground: '#95e6cb' }
