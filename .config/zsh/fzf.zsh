@@ -1,7 +1,7 @@
 # UI
 export FZF_DEFAULT_OPTS=$'
   --color=fg:#707a8c
-  --color=bg:#0b0e14
+  --color=bg:-1
   --color=hl:#ffcc66
   --color=fg+:#cbccc6
   --color=bg+:#191e2a
