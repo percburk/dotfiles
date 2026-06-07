@@ -38,6 +38,9 @@ zstyle ':completion:*' menu no
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 
+# bun completions
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
+
 # fzf fuzzy finder
 source <(fzf --zsh)
 source "$ZDOTDIR/fzf.zsh"
@@ -74,4 +77,3 @@ fi
 
 # zsh-syntax-highlighting should be sourced last
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
