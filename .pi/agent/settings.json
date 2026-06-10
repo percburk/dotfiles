@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.78.1",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
+  "lastChangelogVersion": "0.79.1",
+  "defaultProvider": "cursor",
+  "defaultModel": "opus-4.8@300k",
   "defaultThinkingLevel": "medium",
   "hideThinkingBlock": true,
   "quietStartup": true,
@@ -25,12 +25,23 @@
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-ask-user",
     "npm:@catdaemon/pi-cmux",
-    "npm:@juicesharp/rpiv-btw"
+    "npm:@juicesharp/rpiv-btw",
+    "npm:pi-cursor-sdk"
   ],
   "enabledModels": [
     "openai-codex/gpt-5.5",
     "openai-codex/gpt-5.4",
     "openai-codex/gpt-5.4-mini",
-    "openai-codex/gpt-5.3-codex-spark"
+    "openai-codex/gpt-5.3-codex-spark",
+    "cursor/composer-2-5",
+    "cursor/sonnet-4-6@1m",
+    "cursor/sonnet-4-6@200k",
+    "cursor/composer-2.5:fast",
+    "cursor/opus-4.8@1m",
+    "cursor/opus-4.8@300k",
+    "cursor/sonnet-4.6@1m",
+    "cursor/sonnet-4.6@200k",
+    "cursor/gpt-5.5@1m",
+    "cursor/gpt-5.5@272k"
   ]
 }
