@@ -2,6 +2,7 @@ if true then
   return {}
 end
 
+
 return {
   "nvim-mini/mini.files",
   keys = {
@@ -25,11 +26,6 @@ return {
         require("mini.files").open(LazyVim.root(), true)
       end,
       desc = "Open mini.files (root)",
-    },
-  },
-  opts = {
-    options = {
-      use_as_default_explorer = true,
     },
   },
 }
