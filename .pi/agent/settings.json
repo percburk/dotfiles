@@ -34,8 +34,6 @@
     "openai-codex/gpt-5.4-mini",
     "openai-codex/gpt-5.3-codex-spark",
     "cursor/composer-2-5",
-    "cursor/sonnet-4-6@1m",
-    "cursor/sonnet-4-6@200k",
     "cursor/composer-2.5:fast",
     "cursor/opus-4.8@1m",
     "cursor/opus-4.8@300k",
