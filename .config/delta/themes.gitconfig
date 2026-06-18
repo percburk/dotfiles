@@ -669,7 +669,7 @@
 [delta "ayu-dark"]
     # author: local custom theme based on VS Code Ayu Dark
     dark = true
-    syntax-theme = Catppuccin Mocha
+    syntax-theme = ayu-dark
     file-style = "#d2a6ff"
     file-decoration-style = "#d2a6ff" ul
     hunk-header-decoration-style = "#d2a6ff" box
