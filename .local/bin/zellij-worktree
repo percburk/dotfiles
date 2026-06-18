@@ -80,5 +80,7 @@ fi
 if [[ -n "$existing_tab" ]]; then
   zellij action go-to-tab-by-id "$existing_tab"
 else
-  zellij action new-tab --cwd "$worktree_root" --name "$tab_name"
+  # Supplying an explicit initial shell makes Zellij apply --cwd to the pane
+  # reliably; bare `new-tab --cwd ...` can otherwise inherit the focused pane's cwd.
+  SHELL=/bin/zsh zellij action new-tab --cwd "$worktree_root" --name "$tab_name" -- /bin/zsh
 fi
