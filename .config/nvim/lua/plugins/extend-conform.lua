@@ -4,13 +4,10 @@ return {
   ---@param opts ConformOpts
   opts = function(_, opts)
     local prettier_args = {
-      "--config-precedence",
-      "prefer-file",
-      "--print-width",
-      "88",
+      "--config-precedence=prefer-file",
+      "--print-width=88",
       "--no-semi",
-      "--trailing-comma",
-      "es5",
+      "--trailing-comma=es5",
       "--single-quote",
     }
 
