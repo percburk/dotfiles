@@ -671,8 +671,8 @@
     dark = true
     syntax-theme = ayu-dark
     file-style = "#d2a6ff"
-    file-decoration-style = "#d2a6ff" ul
-    hunk-header-decoration-style = "#d2a6ff" box
+    file-decoration-style = "#565b66" ul
+    hunk-header-decoration-style = "#565b66" box
     hunk-header-file-style = "#d2a6ff"
     hunk-header-line-number-style = "#d2a6ff" box
     hunk-header-style = line-number syntax
