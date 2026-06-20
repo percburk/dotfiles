@@ -53,6 +53,9 @@ source "$ZDOTDIR/fzf-tab.zsh"
 source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
+# theme for zsh syntax highlighting
+source "$ZDOTDIR/ayu-dark-zsh-syntax-highlighting.zsh"
+
 # fnm node version manager
 eval "$(fnm env --use-on-cd --shell zsh)"
 
@@ -75,7 +78,6 @@ if [[ -f "$ZDOTDIR/.zshrc.local" ]]; then
   source "$ZDOTDIR/.zshrc.local"
 fi
 
-source "$ZDOTDIR/ayu-dark-zsh-syntax-highlighting.zsh"
 
 # zsh-syntax-highlighting should be sourced last
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
