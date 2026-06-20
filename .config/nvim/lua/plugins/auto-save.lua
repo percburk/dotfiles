@@ -20,4 +20,11 @@ return {
       return fn.getbufvar(buf, "&modifiable") == 1 and utils.not_in(filetype, {})
     end,
   },
+  keys = {
+    {
+      "<leader>N",
+      ":ASToggle<CR>",
+      desc = "Toggle Auto Save",
+    },
+  },
 }
