@@ -16,6 +16,8 @@ keybinds clear-defaults=true {
         bind "L" { Resize "Increase right"; }
         bind "<" { MoveTab "left"; }
         bind ">" { MoveTab "right"; }
+        bind "Alt p" { TogglePaneInGroup; }
+        bind "Alt Shift p" { ToggleGroupMarking; }
         // one-shot actions
         bind "," { SwitchToMode "renametab"; TabNameInput 0; }
         bind "$" {
