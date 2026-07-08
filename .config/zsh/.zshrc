@@ -78,6 +78,5 @@ if [[ -f "$ZDOTDIR/.zshrc.local" ]]; then
   source "$ZDOTDIR/.zshrc.local"
 fi
 
-
 # zsh-syntax-highlighting should be sourced last
 source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

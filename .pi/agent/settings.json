@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.80.3",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "xhigh",
   "hideThinkingBlock": true,
   "quietStartup": true,
   "compaction": {
@@ -40,6 +40,8 @@
     "cursor/sonnet-4.6@1m",
     "cursor/sonnet-4.6@200k",
     "cursor/gpt-5.5@1m",
-    "cursor/gpt-5.5@272k"
+    "cursor/gpt-5.5@272k",
+    "cursor/sonnet-5@300k",
+    "cursor/sonnet-5@1m"
   ]
 }
