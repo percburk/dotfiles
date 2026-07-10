@@ -50,14 +50,16 @@ return {
     end
 
     opts.defaults = opts.defaults or {}
-    opts.defaults.mappings = opts.defaults.mappings or {}
-    opts.defaults.mappings.i = opts.defaults.mappings.i or {}
-    opts.defaults.mappings.n = opts.defaults.mappings.n or {}
+    local mappings = opts.defaults.mappings or {}
+    opts.defaults.mappings = mappings
 
-    opts.defaults.mappings.i["<C-y>"] = copy_relative_path
-    opts.defaults.mappings.n["<C-y>"] = copy_relative_path
-    opts.defaults.mappings.i["<C-i>"] = insert_relative_path
-    opts.defaults.mappings.n["<C-i>"] = insert_relative_path
+    mappings.i = mappings.i or {}
+    mappings.n = mappings.n or {}
+
+    mappings.i["<C-y>"] = copy_relative_path
+    mappings.n["<C-y>"] = copy_relative_path
+    mappings.i["<C-i>"] = insert_relative_path
+    mappings.n["<C-i>"] = insert_relative_path
 
     return opts
   end,
