@@ -55,7 +55,7 @@ background-image-fit = cover
 background-image-opacity = 0.08
 confirm-close-surface = false
 cursor-click-to-move = true
-font-family = Maple Mono NF
+font-family = Geist Mono
 font-feature = -calt, -liga, -dlig
 font-size = 13
 keybind = alt+super+c=clear_screen

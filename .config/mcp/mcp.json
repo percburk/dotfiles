@@ -8,6 +8,19 @@
       "url": "https://mcp.atlassian.com/v1/mcp/authv2",
       "auth": "oauth",
       "lifecycle": "lazy"
+    },
+    "dynatrace-mcp": {
+      "command": "/opt/homebrew/bin/npx",
+      "args": ["-y", "@dynatrace-oss/dynatrace-mcp-server@latest"],
+      "env": {
+        "PATH": "/opt/homebrew/bin:${PATH}",
+        "DT_ENVIRONMENT": "https://xzr59094.apps.dynatrace.com",
+        "DT_GRAIL_QUERY_BUDGET_GB": "25",
+        "DT_MCP_DISABLE_TELEMETRY": "true"
+      },
+      "lifecycle": "lazy",
+      "requestTimeoutMs": 60000,
+      "directTools": false
     }
   }
 }
