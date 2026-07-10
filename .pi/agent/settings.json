@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.80.3",
-  "defaultProvider": "cursor",
-  "defaultModel": "opus-4.8@300k",
-  "defaultThinkingLevel": "medium",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "defaultThinkingLevel": "high",
   "hideThinkingBlock": true,
   "quietStartup": true,
   "compaction": {
