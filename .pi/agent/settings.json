@@ -1,8 +1,8 @@
 {
   "lastChangelogVersion": "0.80.3",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5",
-  "defaultThinkingLevel": "xhigh",
+  "defaultProvider": "cursor",
+  "defaultModel": "opus-4.8@300k",
+  "defaultThinkingLevel": "medium",
   "hideThinkingBlock": true,
   "quietStartup": true,
   "compaction": {
@@ -42,6 +42,12 @@
     "cursor/gpt-5.5@1m",
     "cursor/gpt-5.5@272k",
     "cursor/sonnet-5@300k",
-    "cursor/sonnet-5@1m"
+    "cursor/sonnet-5@1m",
+    "cursor/gpt-5-6-sol@1m",
+    "cursor/gpt-5-6-luna@1m",
+    "cursor/gpt-5-6-sol@272k",
+    "cursor/gpt-5-6-terra@1m",
+    "cursor/gpt-5-6-luna@272k",
+    "cursor/gpt-5-6-terra@272k"
   ]
 }
