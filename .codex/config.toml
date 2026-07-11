@@ -1,8 +1,9 @@
-model = "gpt-5.5"
+model = "gpt-5.6-terra"
 model_reasoning_effort = "medium"
 plan_mode_reasoning_effort = "high"
 personality = "pragmatic"
 rust_level = "trusted"
+service_tier = "default"
 
 [plugins."github@openai-curated"]
 enabled = true
@@ -14,13 +15,14 @@ enabled = true
 enabled = true
 
 [tui]
-status_line = ["model-with-reasoning", "current-dir", "context-used"]
+status_line = ["model-with-reasoning", "current-dir", "context-used", "git-branch", "pull-request-number"]
 theme = "catppuccin-mocha"
 pet = "disabled"
-status_line_use_colors = true
+status_line_use_colors = false
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+"gpt-5.6-sol" = 2
 
 [features]
 terminal_resize_reflow = true
