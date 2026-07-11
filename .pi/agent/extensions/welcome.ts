@@ -4,6 +4,7 @@ import {
   type ExtensionAPI,
   type ExtensionContext,
 } from '@earendil-works/pi-coding-agent'
+import { truncateToWidth, visibleWidth, wrapTextWithAnsi } from '@earendil-works/pi-tui'
 import { getSetting } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/storage.ts'
 import { type SettingDefinition } from '../npm/node_modules/@juanibiapina/pi-extension-settings/src/settings/types.ts'
 
@@ -83,6 +84,8 @@ const WEATHER_ICONS: Record<WeatherCondition, string> = {
 const WEATHER_TIMEOUT_MS = 5_000
 const WEATHER_RETRY_AFTER_MS = 60_000
 const WEATHER_LOADING_TEXT = '░░░░░░░'
+const MAX_SUBTITLE_LINES = 2
+const SUBTITLE_ELLIPSIS = '…'
 
 const ASCII_ART: Record<ArtName, string[]> = {
   Rebel: [
@@ -179,9 +182,27 @@ function gradientText(text: string, phase: number, palette: Rgb[]) {
     .join('')
 }
 
+function fitToWidth(text: string, width: number, ellipsis = '') {
+  if (width <= 0) return ''
+  return truncateToWidth(text, width, ellipsis)
+}
+
 function center(text: string, width: number) {
-  if (text.length >= width) return text
-  return `${' '.repeat(Math.floor((width - text.length) / 2))}${text}`
+  const fitted = fitToWidth(text, width)
+  return `${' '.repeat(Math.max(0, Math.floor((width - visibleWidth(fitted)) / 2)))}${fitted}`
+}
+
+function wrapSubtitle(text: string, width: number) {
+  if (!text || width <= 0) return text ? [''] : []
+
+  const lines = wrapTextWithAnsi(text, width)
+  if (lines.length <= MAX_SUBTITLE_LINES) return lines
+
+  const lastLineIndex = MAX_SUBTITLE_LINES - 1
+  const textWidth = Math.max(0, width - visibleWidth(SUBTITLE_ELLIPSIS))
+  const finalLine = textWidth > 0 ? fitToWidth(lines[lastLineIndex]!, textWidth) : ''
+
+  return [...lines.slice(0, lastLineIndex), `${finalLine}${SUBTITLE_ELLIPSIS}`]
 }
 
 function projectName() {
@@ -336,18 +357,20 @@ function formatWeatherText(data: WeatherData, unit: TemperatureUnit) {
 function renderHeader(width: number, phase: number, subtitleText: string) {
   const palette = getPalette()
   const asciiArt = getAsciiArt()
-  const lines = asciiArt.map((line, row) =>
+  const artLines = asciiArt.map((line, row) =>
     gradientText(center(line, width), phase + row * 0.045, palette)
   )
-  const subtitle = center(subtitleText, width)
+  const subtitleLines = wrapSubtitle(subtitleText, width).map((line, row) =>
+    `${BOLD}${gradientText(center(line, width), phase + 0.18 + row * 0.045, palette)}${RESET}`
+  )
 
   return [
     '',
-    ...lines,
+    ...artLines,
     '',
-    `${BOLD}${gradientText(subtitle, phase + 0.18, palette)}${RESET}`,
+    ...(subtitleLines.length > 0 ? subtitleLines : ['']),
     '',
-  ]
+  ].map((line) => fitToWidth(line, width))
 }
 
 export default function (pi: ExtensionAPI) {
