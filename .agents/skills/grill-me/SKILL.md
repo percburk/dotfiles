@@ -7,6 +7,6 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 Ask the questions one at a time.
 
-Use the `/ask-user` Pi extension to ask me these questions.
+If Pi is the current agent harness, use the `ask_user` extension to ask me these questions. In other agent harnesses, ask each question using the harness's normal interaction mechanism.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
