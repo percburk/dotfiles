@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.80.6",
-  "defaultProvider": "cursor",
-  "defaultModel": "gpt-5-6-luna@1m",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-terra",
   "defaultThinkingLevel": "medium",
   "hideThinkingBlock": true,
   "quietStartup": true,
@@ -30,7 +30,6 @@
   ],
   "enabledModels": [
     "openai-codex/gpt-5.5",
-    "openai-codex/gpt-5.4",
     "cursor/composer-2-5",
     "cursor/composer-2.5:fast",
     "cursor/opus-4.8@1m",
