@@ -46,6 +46,14 @@ return {
   "folke/snacks.nvim",
   opts = {
     image = {},
+    words = {
+      -- omnisharp cannot resolve standard LSP requests from its virtual metadata documents.
+      -- See https://github.com/OmniSharp/omnisharp-roslyn/issues/2238.
+      filter = function(buf)
+        local name = vim.api.nvim_buf_get_name(buf)
+        return vim.g.snacks_words ~= false and vim.b[buf].snacks_words ~= false and not name:find("/%$metadata%$/")
+      end,
+    },
     dashboard = {
       preset = {
         header = header,

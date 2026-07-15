@@ -1,7 +1,7 @@
 onboarding = false
 
 [theme]
-name = "tokyo-night"
+name = "catppuccin"
 auto_switch = false
 
 [ui.toast]
@@ -12,3 +12,15 @@ agent_panel_sort = "spaces"
 
 [experimental]
 kitty_graphics = true
+
+[keys]
+prefix = "alt+u"
+rename_tab = ["prefix+shift+t", "prefix+comma"]
+detach = ["prefix+q", "prefix+d"]
+split_vertical = ["prefix+v", "prefix+backslash"]
+split_horizontal = "prefix+minus"
+workspace_picker = "prefix+w"
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+previous_agent = "prefix+alt+k"
+next_agent = "prefix+alt+j"
