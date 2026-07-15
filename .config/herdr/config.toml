@@ -4,6 +4,24 @@ onboarding = false
 name = "catppuccin"
 auto_switch = false
 
+[theme.custom]
+accent = "#E6B450"
+panel_bg = "reset"
+surface0 = "#141821"
+surface1 = "#1B1F29"
+surface_dim = "#161A24"
+overlay0 = "#5A6378"
+overlay1 = "#6C7380"
+text = "#BFBDB6"
+subtext0 = "#ACB6BF"
+mauve = "#D2A6FF"
+green = "#70BF56"
+yellow = "#FFB454"
+red = "#D95757"
+blue = "#59C2FF"
+teal = "#39BAE6"
+peach = "#FF8F40"
+
 [ui.toast]
 delivery = "terminal"
 
