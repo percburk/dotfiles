@@ -76,11 +76,12 @@
     "syntaxOperator": "darkOperator",
     "syntaxPunctuation": "darkFg",
     "thinkingOff": "#444B56",
-    "thinkingMinimal": "darkFgMuted",
+    "thinkingMinimal": "darkAdded",
     "thinkingLow": "darkTag",
     "thinkingMedium": "darkConstant",
-    "thinkingHigh": "darkString",
+    "thinkingHigh": "darkAccent",
     "thinkingXhigh": "darkRemoved",
+    "thinkingMax": "darkString",
     "bashMode": "darkKeyword"
   },
   "export": {
