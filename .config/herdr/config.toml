@@ -22,11 +22,14 @@ blue = "#59C2FF"
 teal = "#39BAE6"
 peach = "#FF8F40"
 
-[ui.toast]
-delivery = "terminal"
-
 [ui]
 agent_panel_sort = "spaces"
+
+[ui.sidebar.spaces]
+row_gap = 1
+
+[ui.toast]
+delivery = "terminal"
 
 [experimental]
 kitty_graphics = true
