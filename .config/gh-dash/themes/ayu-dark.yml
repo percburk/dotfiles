@@ -1,0 +1,24 @@
+theme:
+  colors:
+    icon:
+      newcontributor: '#39BAE6'
+      contributor: '#59C2FF'
+      collaborator: '#95E6CB'
+      member: '#F29668'
+      owner: '#E6B450'
+      unknownrole: '#5A6378'
+    text:
+      primary: '#BFBDB6'
+      secondary: '#D2A6FF'
+      inverted: '#0D1017'
+      faint: '#6C7380'
+      warning: '#FFB454'
+      success: '#70BF56'
+      error: '#D95757'
+      actor: '#39BAE6'
+    background:
+      selected: '#161A24'
+    border:
+      primary: '#6C7380'
+      secondary: '#5A6378'
+      faint: '#1B1F29'
