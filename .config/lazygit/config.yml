@@ -80,32 +80,32 @@ gui:
   showFileIcons: true
   theme:
     activeBorderColor:
-      - '#a6e3a1'
+      - '#E6B450'
       - bold
     inactiveBorderColor:
-      - '#a6adc8'
+      - '#5A6378'
     searchingActiveBorderColor:
-      - '#f9e2af'
+      - '#FFB454'
     optionsTextColor:
-      - '#89b4fa'
+      - '#59C2FF'
     selectedLineBgColor:
-      - '#181D26'
+      - '#161A24'
     inactiveViewSelectedLineBgColor:
-      - '#6c7086'
+      - '#304357'
     cherryPickedCommitFgColor:
-      - '#a6e3a1'
+      - '#70BF56'
     cherryPickedCommitBgColor:
-      - '#45475a'
+      - '#1D2214'
     markedBaseCommitFgColor:
-      - '#89b4fa'
+      - '#59C2FF'
     markedBaseCommitBgColor:
-      - '#f9e2af'
+      - '#4C4126'
     unstagedChangesColor:
-      - '#f38ba8'
+      - '#F26D78'
     defaultFgColor:
-      - '#cdd6f4'
+      - '#BFBDB6'
   authorColors:
-    '*': '#b4befe'
+    '*': '#D2A6FF'
 git:
   pagers:
     - colorArg: always
