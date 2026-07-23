@@ -1,5 +1,7 @@
+# yaml-language-server: $schema=https://gh-dash.dev/schema.json
 include:
   - ./themes/ayu-dark.yml
+  - ./repo-paths.yml
 
 prSections:
   - title: My Pull Requests
@@ -80,10 +82,6 @@ defaults:
         hidden: true
   refetchIntervalMinutes: 30
 keybindings: {}
-repoPaths:
-  anytimefitness/*: ~/repos/*
-  Orangetheory/*: ~/repos/*
-  purpose-brands/*: ~/repos/*
 theme:
   ui:
     sectionsShowCount: true
