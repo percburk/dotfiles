@@ -248,5 +248,6 @@
   "workbench.productIconTheme": "fluent-icons",
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.agentsWindowButton.enabled": false
+  "workbench.agentsWindowButton.enabled": false,
+  "extensions.installCooldownHours": 72
 }
