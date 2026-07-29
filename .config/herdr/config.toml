@@ -35,7 +35,7 @@ delivery = "terminal"
 kitty_graphics = true
 
 [keys]
-prefix = "alt+u"
+prefix = "ctrl+b"
 rename_tab = ["prefix+shift+t", "prefix+comma"]
 detach = ["prefix+q", "prefix+d"]
 split_vertical = ["prefix+v", "prefix+backslash"]
