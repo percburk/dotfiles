@@ -7,3 +7,9 @@ export BUN_INSTALL="$HOME/.bun"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+# make Homebrew binaries visible to non-interactive ssh (mosh-server, herdr)
+case ":$PATH:" in
+  *":/opt/homebrew/bin:"*) ;;
+  *) export PATH="/opt/homebrew/bin:$PATH" ;;
+esac
