@@ -42,6 +42,58 @@ ___________________________________________________________/\\\_________________
 math.randomseed(os.time())
 local header = headers[math.random(#headers)]
 
+---@param picker snacks.Picker
+---@return string
+local function selected_paths(picker)
+  local cwd = picker:cwd() or vim.fn.getcwd()
+  local values = {}
+
+  for _, item in ipairs(picker:selected({ fallback = true })) do
+    local path = Snacks.picker.util.path(item)
+
+    if path then
+      path = vim.fs.relpath(cwd, path) or path
+    end
+
+    values[#values + 1] = path or (type(item.data) == "string" and item.data) or item.text
+  end
+
+  return table.concat(values, "\n")
+end
+
+---@param picker snacks.Picker
+local function copy_relative_path(picker)
+  local value = selected_paths(picker)
+
+  if value == "" then
+    return
+  end
+
+  local reg = vim.v.register
+  vim.fn.setreg(reg, value)
+  Snacks.notify(("Yanked to register `%s`:\n%s"):format(reg, value), { title = "Snacks Picker" })
+end
+
+---@param picker snacks.Picker
+local function insert_relative_path(picker)
+  local value = selected_paths(picker)
+  local was_insert = picker.input.mode == "i"
+
+  picker:close()
+
+  if value == "" then
+    return
+  end
+
+  vim.api.nvim_paste(value, true, -1)
+
+  if was_insert then
+    vim.schedule(function()
+      vim.cmd.startinsert({ bang = true })
+    end)
+  end
+end
+
 return {
   "folke/snacks.nvim",
   opts = {
@@ -57,6 +109,26 @@ return {
     dashboard = {
       preset = {
         header = header,
+      },
+    },
+    picker = {
+      actions = {
+        copy_relative_path = copy_relative_path,
+        insert_relative_path = insert_relative_path,
+      },
+      win = {
+        input = {
+          keys = {
+            ["<c-y>"] = { "copy_relative_path", mode = { "i", "n" } },
+            ["<c-i>"] = { "insert_relative_path", mode = { "i", "n" } },
+          },
+        },
+        list = {
+          keys = {
+            ["<c-y>"] = "copy_relative_path",
+            ["<c-i>"] = "insert_relative_path",
+          },
+        },
       },
     },
   },
