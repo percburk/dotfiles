@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat >&2 <<'EOF'
+Usage:
+  herdr-worktree path <worktree-path>
+  herdr-worktree branch <branch-name>
+
+Open an existing Git worktree in Herdr, or focus its existing Herdr workspace.
+This command must run from a Herdr-managed pane.
+EOF
+}
+
+fail() {
+  echo "herdr-worktree: $*" >&2
+  exit 1
+}
+
+if [[ "${HERDR_ENV:-}" != "1" ]]; then
+  fail "must be run from a Herdr-managed pane (HERDR_ENV=1)"
+fi
+
+for command in herdr git jq; do
+  command -v "$command" >/dev/null 2>&1 || fail "required command not found: $command"
+done
+
+if [[ $# -ne 2 ]]; then
+  usage
+  exit 2
+fi
+
+mode="$1"
+value="$2"
+repo_cwd="$(git rev-parse --show-toplevel 2>/dev/null)" || fail "current directory is not inside a Git worktree"
+worktrees_json="$(herdr worktree list --cwd "$repo_cwd" --json)"
+
+# Herdr permits listing from a linked checkout, but create/open actions must use
+# the repo's original checkout as their source workspace.
+parent_count="$(jq -r '[
+  .result.worktrees[]?
+  | select(.is_linked_worktree == false)
+] | length' <<<"$worktrees_json")"
+[[ "$parent_count" == "1" ]] || fail "expected exactly one repo parent worktree, found $parent_count for: $repo_cwd"
+
+source_cwd="$(jq -r '[
+  .result.worktrees[]?
+  | select(.is_linked_worktree == false)
+  | .path
+][0] // empty' <<<"$worktrees_json")"
+[[ -n "$source_cwd" ]] || fail "repo parent worktree path is empty"
+[[ -d "$source_cwd" ]] || fail "repo parent worktree path does not exist: $source_cwd"
+source_cwd="$(cd "$source_cwd" && pwd -P)"
+
+target_path=""
+
+case "$mode" in
+  path)
+    [[ -n "$value" ]] || fail "worktree path is empty"
+    [[ -d "$value" ]] || fail "worktree path does not exist: $value"
+    target_path="$(cd "$value" && pwd -P)"
+    ;;
+  branch)
+    [[ -n "$value" ]] || fail "branch name is empty"
+    branch_match_count="$(jq -r --arg branch "$value" '[
+      .result.worktrees[]?
+      | select(.branch == $branch)
+    ] | length' <<<"$worktrees_json")"
+    if [[ "$branch_match_count" == "0" ]]; then
+      fail "no worktree found for branch: $value"
+    fi
+    [[ "$branch_match_count" == "1" ]] || fail "multiple worktrees found for branch: $value"
+
+    target_path="$(jq -r --arg branch "$value" '[
+      .result.worktrees[]?
+      | select(.branch == $branch)
+      | .path
+    ][0] // empty' <<<"$worktrees_json")"
+    [[ -n "$target_path" ]] || fail "worktree path is empty for branch: $value"
+    [[ -d "$target_path" ]] || fail "worktree path does not exist: $target_path"
+    target_path="$(cd "$target_path" && pwd -P)"
+    ;;
+  *)
+    usage
+    exit 2
+    ;;
+esac
+
+# Match canonical paths so symlinked worktree paths still reuse their workspace.
+existing_workspace=""
+while IFS=$'\t' read -r path workspace_id; do
+  [[ -n "$path" && -d "$path" ]] || continue
+  if [[ "$(cd "$path" && pwd -P)" == "$target_path" ]]; then
+    existing_workspace="$workspace_id"
+    break
+  fi
+done < <(jq -r '
+  .result.worktrees[]?
+  | [.path, (.open_workspace_id // "")]
+  | @tsv
+' <<<"$worktrees_json")
+
+set_workspace_label=true
+if [[ -n "$existing_workspace" ]]; then
+  # Do not pass --label to an already-open workspace: preserve manual renames.
+  if herdr workspace focus "$existing_workspace" >/dev/null 2>/dev/null; then
+    exit 0
+  fi
+
+  # The listed workspace may have closed before focus; let open re-resolve it.
+  set_workspace_label=false
+fi
+
+workspace_name="$(basename "$target_path")"
+
+# Herdr records the checkout as a worktree workspace, deduplicates concurrent
+# opens, and moves focus to it. Successful API JSON is not useful in lazygit.
+if [[ "$set_workspace_label" == true ]]; then
+  herdr worktree open \
+    --cwd "$source_cwd" \
+    --path "$target_path" \
+    --label "$workspace_name" \
+    --focus \
+    --json >/dev/null
+else
+  herdr worktree open \
+    --cwd "$source_cwd" \
+    --path "$target_path" \
+    --focus \
+    --json >/dev/null
+fi
