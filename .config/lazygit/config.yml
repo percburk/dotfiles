@@ -75,6 +75,13 @@ customCommands:
     description: 'Open current worktree in Zellij'
     command: 'zellij-worktree path "$(git rev-parse --show-toplevel)"'
 
+os:
+  # Override `nvim-remote` default behavior of opening files to edit in a new nvim tab, just open as a buffer
+  editPreset: 'nvim-remote'
+  edit: '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})'
+  editAtLine: '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")'
+  openDirInEditor: '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})'
+
 gui:
   nerdFontsVersion: '3'
   showFileIcons: true
