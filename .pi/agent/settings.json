@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.84.0",
+  "lastChangelogVersion": "0.84.1",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
-  "defaultThinkingLevel": "xhigh",
+  "defaultThinkingLevel": "medium",
   "hideThinkingBlock": true,
   "quietStartup": true,
   "compaction": {
@@ -27,7 +27,8 @@
     "npm:pi-ask-user",
     "npm:@catdaemon/pi-cmux",
     "npm:@juicesharp/rpiv-btw",
-    "npm:pi-cursor-sdk"
+    "npm:pi-cursor-sdk",
+    "npm:pi-simplify"
   ],
   "enabledModels": [
     "openai-codex/gpt-5.5",
