@@ -1,0 +1,3 @@
+dictionaries = ["en_us"]
+words = []
+min_word_length = 4
