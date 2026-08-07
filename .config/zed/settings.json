@@ -13,7 +13,7 @@
   "git_panel": {
     "dock": "right"
   },
-  "vim_mode": false,
+  "vim_mode": true,
   "theme": "honeycrisp IIe tang",
   "ui_font_family": "Geist Mono",
   "ui_font_features": {
@@ -49,8 +49,10 @@
   "agent": {
     "dock": "left",
     "default_model": {
-      "model": "claude-sonnet-4.5",
-      "provider": "copilot_chat",
+      "effort": "medium",
+      "enable_thinking": true,
+      "model": "gpt-5.5",
+      "provider": "openai-subscribed",
     },
     "model_parameters": [],
   },
@@ -59,6 +61,12 @@
       "type": "registry"
     },
     "codex-acp": {
+      "default_config_options": {
+        "model": "gpt-5.6-sol",
+        "fast-mode": "off",
+        "reasoning_effort": "medium",
+        "mode": "agent-full-access"
+      },
       "type": "registry"
     },
     "opencode": {
