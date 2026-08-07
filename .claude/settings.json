@@ -1,21 +1,35 @@
 {
+  "agentPushNotifEnabled": false,
+  "autoCompactEnabled": false,
+  "effortLevel": "high",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/Users/kevin.burk/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ]
+  },
+  "model": "opus",
   "permissions": {
     "defaultMode": "plan"
   },
-  "model": "opus",
+  "preferredNotifChannel": "notifications_disabled",
+  "remoteControlAtStartup": false,
   "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.sh"
+    "command": "~/.claude/statusline.sh",
+    "type": "command"
   },
-  "effortLevel": "high",
   "tui": "fullscreen",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
-  "voiceEnabled": true,
-  "preferredNotifChannel": "notifications_disabled",
-  "autoCompactEnabled": false,
-  "remoteControlAtStartup": false,
-  "agentPushNotifEnabled": false
+  "voiceEnabled": true
 }

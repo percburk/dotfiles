@@ -28,3 +28,11 @@ status_line_use_colors = false
 hooks = true
 terminal_resize_reflow = true
 
+[projects."/Users/kevin.burk"]
+trust_level = "trusted"
+
+[hooks.state]
+
+[hooks.state."/Users/kevin.burk/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:87a395009c9d0ae51f0514776547ecdc3be9e5ab1b298fd283e8cb95843b868b"
+

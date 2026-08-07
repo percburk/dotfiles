@@ -5,6 +5,7 @@ return {
     opts.inlay_hints.enabled = false
 
     opts.servers = opts.servers or {}
+    opts.servers.codebook = opts.servers.codebook or {}
     opts.servers.omnisharp = opts.servers.omnisharp or {}
     local omnisharp = opts.servers.omnisharp
 
