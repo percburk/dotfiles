@@ -9,7 +9,6 @@ customCommands:
         key: 'Name'
         initialValue: ''
     command: 'git worktree add ../{{ .Form.Name }} {{ .CheckedOutBranch.Name }} -b {{ .Form.Name }}'
-
   # Create worktree from selected branch (when in branches view)
   - key: 'N'
     context: 'localBranches'
@@ -20,68 +19,57 @@ customCommands:
         key: 'Name'
         initialValue: ''
     command: 'git worktree add ../{{ .Form.Name }} {{ .SelectedLocalBranch.Name }} -b {{ .Form.Name }}'
-
   # Open cmux workspace for selected worktree (when in worktrees view)
   - key: 'O'
     context: 'worktrees'
     description: 'Open selected worktree in cmux'
     command: 'cmux-worktree path {{ .SelectedWorktree.Path | quote }}'
-
   # Open cmux workspace for selected branch's worktree (when in branches view)
   - key: 'O'
     context: 'localBranches'
     description: 'Open selected branch worktree in cmux'
     command: 'cmux-worktree branch {{ .SelectedLocalBranch.Name | quote }}'
-
   # Open cmux workspace for current worktree (when in files view)
   - key: 'O'
     context: 'files'
     description: 'Open current worktree in cmux'
     command: 'cmux-worktree path "$(git rev-parse --show-toplevel)"'
-
   # Open Herdr workspace for selected worktree (when in worktrees view)
   - key: 'H'
     context: 'worktrees'
     description: 'Open selected worktree in Herdr'
     command: 'herdr-worktree path {{ .SelectedWorktree.Path | quote }}'
-
   # Open Herdr workspace for selected branch's worktree (when in branches view)
   - key: 'H'
     context: 'localBranches'
     description: 'Open selected branch worktree in Herdr'
     command: 'herdr-worktree branch {{ .SelectedLocalBranch.Name | quote }}'
-
   # Open Herdr workspace for current worktree (when in files view)
   - key: 'H'
     context: 'files'
     description: 'Open current worktree in Herdr'
     command: 'herdr-worktree path "$(git rev-parse --show-toplevel)"'
-
   # Open Zellij tab for selected worktree (when in worktrees view)
   - key: 'Z'
     context: 'worktrees'
     description: 'Open selected worktree in Zellij'
     command: 'zellij-worktree path {{ .SelectedWorktree.Path | quote }}'
-
   # Open Zellij tab for selected branch's worktree (when in branches view)
   - key: 'Z'
     context: 'localBranches'
     description: 'Open selected branch worktree in Zellij'
     command: 'zellij-worktree branch {{ .SelectedLocalBranch.Name | quote }}'
-
   # Open Zellij tab for current worktree (when in files view)
   - key: 'Z'
     context: 'files'
     description: 'Open current worktree in Zellij'
     command: 'zellij-worktree path "$(git rev-parse --show-toplevel)"'
-
 os:
   # Override `nvim-remote` default behavior of opening files to edit in a new nvim tab, just open as a buffer
   editPreset: 'nvim-remote'
   edit: '[ -z "$NVIM" ] && (nvim -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}})'
   editAtLine: '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")'
   openDirInEditor: '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote-send "q" && nvim --server "$NVIM" --remote {{dir}})'
-
 gui:
   nerdFontsVersion: '3'
   showFileIcons: true
@@ -114,6 +102,6 @@ gui:
   authorColors:
     '*': '#D2A6FF'
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+      command: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"

@@ -24,6 +24,7 @@ peach = "#FF8F40"
 
 [ui]
 agent_panel_sort = "spaces"
+show_agent_labels_on_pane_borders = true
 
 [ui.sidebar.spaces]
 row_gap = 1
@@ -35,15 +36,18 @@ delivery = "terminal"
 kitty_graphics = true
 
 [keys]
-prefix = "ctrl+b"
-rename_tab = ["prefix+shift+t", "prefix+comma"]
-detach = ["prefix+q", "prefix+d"]
-split_vertical = ["prefix+v", "prefix+backslash"]
-split_horizontal = "prefix+minus"
-workspace_picker = "prefix+w"
-navigate_workspace_up = "k"
-navigate_workspace_down = "j"
+navigate_workspace_up = ["k", "up"]
+navigate_workspace_down = ["j", "down"]
+rename_tab = ["prefix+comma", "prefix+shift+t"]
 previous_agent = "prefix+alt+k"
 next_agent = "prefix+alt+j"
 switch_workspace = "prefix+shift+1..9"
 focus_agent = "prefix+alt+1..9"
+
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "exec \"${SHELL:-sh}\""
+description = "open scratch terminal"
+width = "60%"
+height = "60%"
