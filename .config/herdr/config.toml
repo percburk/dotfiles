@@ -32,6 +32,9 @@ row_gap = 1
 [ui.toast]
 delivery = "terminal"
 
+[ui.toast.clipboard]
+position = "top-right"
+
 [experimental]
 kitty_graphics = true
 
