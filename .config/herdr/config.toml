@@ -1,10 +1,14 @@
 onboarding = false
 
 [theme]
-name = "catppuccin"
+name = "terminal"
 auto_switch = false
 
 [theme.custom]
+# Ayu Dark uses #475266 at 20% for selected rows and 25% for hover;
+# these are the corresponding opaque composites over its #10141C sidebar.
+active_row_bg = "#1B2029"
+selection_bg = "#1E242F"
 accent = "#E6B450"
 panel_bg = "reset"
 surface0 = "#141821"

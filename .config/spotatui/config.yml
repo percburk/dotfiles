@@ -41,6 +41,7 @@ behavior:
   tick_rate_milliseconds: 250
   animation_tick_rate_milliseconds: 16
   enable_text_emphasis: true
+  banner_gradient: true
   show_loading_indicator: false
   enforce_wide_search_bar: false
   enable_global_song_count: true
@@ -50,8 +51,8 @@ behavior:
   enable_announcements: true
   announcement_feed_url: null
   seen_announcement_ids:
-  - 2026-02-27-major-refactor-complete
-  - 2026-05-19-sonos-help-wanted
+    - 2026-02-27-major-refactor-complete
+    - 2026-05-19-sonos-help-wanted
   shuffle_enabled: false
   liked_icon: ♥
   shuffle_icon: 🔀
@@ -75,21 +76,22 @@ behavior:
   playbar_cover_art_size_percent: 100
   keepawake_enabled: true
   sync_token: null
+# Ayu Dark palette: https://github.com/ayu-theme/ayu-colors
 theme:
   preset: Custom
-  active: 163, 190, 140
-  banner: 136, 192, 208
-  error_border: 191, 97, 106
-  error_text: 191, 97, 106
-  hint: 235, 203, 139
-  hovered: 180, 142, 173
-  inactive: 76, 86, 106
-  playbar_background: Reset
-  playbar_progress: 136, 192, 208
-  playbar_progress_text: 236, 239, 244
-  playbar_text: 236, 239, 244
-  selected: 129, 161, 193
-  text: 236, 239, 244
-  background: Reset
-  header: 136, 192, 208
-  highlighted_lyrics: 136, 192, 208
+  active: '89, 194, 255' # #59C2FF — current track
+  banner: '89, 194, 255' # #59C2FF
+  error_border: '217, 87, 87' # #D95757
+  error_text: '217, 87, 87' # #D95757
+  hint: '255, 180, 84' # #FFB454
+  hovered: '210, 166, 255' # #D2A6FF — hovered pane
+  inactive: '90, 99, 120' # #5A6378
+  playbar_background: '16, 20, 28' # #10141C
+  playbar_progress: '210, 166, 255' # #D2A6FF
+  playbar_progress_text: '191, 189, 182' # #BFBDB6
+  playbar_text: '191, 189, 182' # #BFBDB6
+  selected: '230, 180, 80' # #E6B450 — active pane / LazyGit focus
+  text: '191, 189, 182' # #BFBDB6
+  background: Reset # Preserve the terminal's own background
+  header: '89, 194, 255' # #59C2FF
+  highlighted_lyrics: '149, 230, 203' # #95E6CB
