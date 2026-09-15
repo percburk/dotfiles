@@ -1,0 +1,80 @@
+#!/bin/sh
+
+set -eu
+
+MODEL="${LAZYGIT_AI_COMMIT_MODEL:-openai-codex/gpt-5.6-luna}"
+THINKING="${LAZYGIT_AI_COMMIT_THINKING:-minimal}"
+MAX_DIFF_BYTES=65536
+ALLOWED_TYPES='feat|fix|refactor|perf|test|docs|build|ci|chore|style|revert'
+
+fail() {
+  printf 'Error: %s\n' "$1" >&2
+  exit 1
+}
+
+[ "$#" -eq 1 ] || fail 'Usage: lazygit-ai-commit TYPE'
+type=$1
+
+case "$type" in
+  auto|feat|fix|refactor|perf|test|docs|build|ci|chore|style|revert) ;;
+  *) fail "Unknown commit type: $type" ;;
+esac
+
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || fail 'Not inside a Git repository.'
+git diff --cached --quiet && fail 'No staged changes. Stage changes before generating a commit message.'
+
+branch=$(git branch --show-current)
+branch=${branch:-detached HEAD}
+
+system_prompt=$(cat <<'EOF'
+Write one Conventional Commit subject from the supplied staged Git changes.
+Return exactly one plain-text line and nothing else.
+Use the format TYPE: description with no scope and no exclamation mark.
+The description must start lowercase, use imperative mood, have no trailing period,
+and make the entire line at most 72 characters.
+If Requested type is auto, choose exactly one of feat, fix, refactor, perf, test,
+docs, build, ci, chore, style, or revert. Otherwise use Requested type exactly.
+Describe only the staged patch. Never use Markdown, quotes, or backticks.
+EOF
+)
+
+if ! output=$(
+  {
+    printf 'Requested type: %s\n' "$type"
+    printf 'Current branch: %s\n\n' "$branch"
+    printf 'Staged diff summary:\n'
+    git diff --cached --stat
+    printf '\nStaged patch, truncated to %s bytes:\n' "$MAX_DIFF_BYTES"
+    git diff --cached --no-ext-diff --no-color --unified=3 | head -c "$MAX_DIFF_BYTES"
+  } |
+    PI_SKIP_VERSION_CHECK=1 pi \
+      -p \
+      --model "$MODEL" \
+      --thinking "$THINKING" \
+      --no-session \
+      --no-tools \
+      --no-extensions \
+      --no-skills \
+      --no-prompt-templates \
+      --no-themes \
+      --no-context-files \
+      --no-approve \
+      --system-prompt "$system_prompt" \
+      2>/dev/null
+); then
+  fail 'Pi failed to generate a commit message.'
+fi
+
+message=$(printf '%s\n' "$output" | sed -n '/[^[:space:]]/{s/\r$//;p;q;}')
+[ -n "$message" ] || fail 'Pi returned an empty commit message.'
+
+if [ "$type" = auto ]; then
+  pattern="^($ALLOWED_TYPES): [^[:space:]].*$"
+else
+  pattern="^${type}: [^[:space:]].*$"
+fi
+
+printf '%s\n' "$message" | grep -Eq "$pattern" ||
+  fail "Pi returned a malformed commit message: $message"
+
+printf '%s\n' "$message"
