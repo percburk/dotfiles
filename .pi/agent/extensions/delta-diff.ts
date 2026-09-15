@@ -1,6 +1,7 @@
 import { spawn } from 'node:child_process'
 import {
   createEditToolDefinition,
+  keyHint,
   type EditToolDetails,
   type ExtensionAPI,
   type ExtensionContext,
@@ -17,12 +18,11 @@ import { type SettingDefinition } from '../npm/node_modules/@juanibiapina/pi-ext
 const EXTENSION_NAME = 'delta-diff'
 const DELTA_TIMEOUT_MS = 5_000
 const MIN_DELTA_WIDTH = 40
+const DELTA_PREVIEW_ROWS = 20
 
 const LEFT_TOOL_SUCCESS_GUTTER_WIDTH = 1
 const LEFT_TERMINAL_GAP_WIDTH = 1
 const RIGHT_TERMINAL_GAP_WIDTH = 1
-const DELTA_RENDER_GUTTER_WIDTH =
-  LEFT_TOOL_SUCCESS_GUTTER_WIDTH + LEFT_TERMINAL_GAP_WIDTH + RIGHT_TERMINAL_GAP_WIDTH
 const DELTA_PROCESS_WIDTH_OFFSET = 4
 
 const TRAILING_CLEAR_TO_EOL_REGEX = /(\x1b\[(?:0)?K(?:\x1b\[[0-9;]*m)*)$/
@@ -44,7 +44,7 @@ type DeltaEditDetails = EditToolDetails & {
 type ToolBgName = 'toolPendingBg' | 'toolSuccessBg' | 'toolErrorBg'
 type ToolTheme = {
   bg(color: ToolBgName, text: string): string
-  fg(color: 'toolTitle' | 'accent', text: string): string
+  fg(color: 'toolTitle' | 'accent' | 'muted', text: string): string
   bold(text: string): string
 }
 type ToolStatus = { isPartial: boolean; isError: boolean }
@@ -109,33 +109,137 @@ function renderDeltaContentLine(rawLine: string, width: number) {
   return `${line.slice(0, clearToEnd.index)}${padding}${clearToEnd[0]}`
 }
 
-function renderDeltaGutters(edgeBg: (text: string) => string) {
+function renderDeltaGutters(edgeBg: (text: string) => string, width: number) {
+  // Preserve the normal three-column gutter, but always leave at least one
+  // column for content when a component is rendered at an unusually narrow
+  // width.
+  let remaining = Math.max(0, width - 1)
+  const successWidth = Math.min(LEFT_TOOL_SUCCESS_GUTTER_WIDTH, remaining)
+  remaining -= successWidth
+  const leftGapWidth = Math.min(LEFT_TERMINAL_GAP_WIDTH, remaining)
+  remaining -= leftGapWidth
+  const rightGapWidth = Math.min(RIGHT_TERMINAL_GAP_WIDTH, remaining)
+
   return {
-    left:
-      edgeBg(' '.repeat(LEFT_TOOL_SUCCESS_GUTTER_WIDTH)) +
-      ' '.repeat(LEFT_TERMINAL_GAP_WIDTH),
-    right: ' '.repeat(RIGHT_TERMINAL_GAP_WIDTH),
+    left: edgeBg(' '.repeat(successWidth)) + ' '.repeat(leftGapWidth),
+    right: ' '.repeat(rightGapWidth),
+    width: successWidth + leftGapWidth + rightGapWidth,
   }
 }
 
 class DeltaDiffText implements Component {
   private readonly text: string
-  private readonly edgeBg: (text: string) => string
+  private readonly rawLines: string[]
+  private theme: ToolTheme
+  private expanded: boolean
+  private cachedWidth?: number
+  private cachedCompactLines?: string[]
+  private cachedExpandedLines?: string[]
 
-  constructor(text: string, edgeBg: (text: string) => string) {
+  constructor(text: string, theme: ToolTheme, expanded: boolean) {
     this.text = text
-    this.edgeBg = edgeBg
+    this.rawLines = text.split('\n')
+    this.theme = theme
+    this.expanded = expanded
   }
 
-  invalidate() {}
+  hasText(text: string) {
+    return this.text === text
+  }
+
+  setTheme(theme: ToolTheme) {
+    if (this.theme === theme) return
+    this.theme = theme
+    this.invalidate()
+  }
+
+  setExpanded(expanded: boolean) {
+    this.expanded = expanded
+  }
+
+  invalidate() {
+    this.cachedWidth = undefined
+    this.cachedCompactLines = undefined
+    this.cachedExpandedLines = undefined
+  }
+
+  private prepareWidth(width: number) {
+    const safeWidth = Math.max(1, Math.floor(width))
+    if (this.cachedWidth !== safeWidth) {
+      this.cachedWidth = safeWidth
+      this.cachedCompactLines = undefined
+      this.cachedExpandedLines = undefined
+    }
+    return safeWidth
+  }
+
+  private renderRows(rawLines: string[], width: number) {
+    const edgeBg = (text: string) => this.theme.bg('toolSuccessBg', text)
+    const { left, right, width: gutterWidth } = renderDeltaGutters(edgeBg, width)
+    const deltaWidth = Math.max(1, width - gutterWidth)
+    return rawLines.map(
+      (rawLine) => `${left}${renderDeltaContentLine(rawLine, deltaWidth)}${right}`
+    )
+  }
+
+  private renderHint(hiddenRows: number, width: number) {
+    // Start from a clean SGR state so delta's final line styling cannot bleed
+    // into the preview hint in terminals that do not reset between rows.
+    const hint =
+      '\x1b[0m' +
+      this.theme.fg('muted', `… ${hiddenRows} more rows — `) +
+      keyHint('app.tools.expand', 'to expand')
+    return this.renderRows([hint], width)[0] ?? ''
+  }
+
+  private renderCompact(width: number) {
+    if (this.cachedCompactLines) return this.cachedCompactLines
+
+    if (this.rawLines.length <= DELTA_PREVIEW_ROWS) {
+      const lines =
+        this.cachedExpandedLines ?? this.renderRows(this.rawLines, width)
+      this.cachedCompactLines = lines
+      this.cachedExpandedLines = lines
+      return lines
+    }
+
+    const content = this.cachedExpandedLines
+      ? this.cachedExpandedLines.slice(0, DELTA_PREVIEW_ROWS)
+      : this.renderRows(this.rawLines.slice(0, DELTA_PREVIEW_ROWS), width)
+    this.cachedCompactLines = [
+      ...content,
+      this.renderHint(this.rawLines.length - DELTA_PREVIEW_ROWS, width),
+    ]
+    return this.cachedCompactLines
+  }
+
+  private renderExpanded(width: number) {
+    if (this.cachedExpandedLines) return this.cachedExpandedLines
+
+    if (this.cachedCompactLines && this.rawLines.length > DELTA_PREVIEW_ROWS) {
+      const remaining = this.renderRows(
+        this.rawLines.slice(DELTA_PREVIEW_ROWS),
+        width
+      )
+      this.cachedExpandedLines = [
+        ...this.cachedCompactLines.slice(0, DELTA_PREVIEW_ROWS),
+        ...remaining,
+      ]
+    } else {
+      this.cachedExpandedLines = this.renderRows(this.rawLines, width)
+    }
+
+    if (this.rawLines.length <= DELTA_PREVIEW_ROWS) {
+      this.cachedCompactLines = this.cachedExpandedLines
+    }
+    return this.cachedExpandedLines
+  }
 
   render(width: number) {
-    const { left, right } = renderDeltaGutters(this.edgeBg)
-    const deltaWidth = Math.max(1, width - DELTA_RENDER_GUTTER_WIDTH)
-
-    return this.text
-      .split('\n')
-      .map((rawLine) => `${left}${renderDeltaContentLine(rawLine, deltaWidth)}${right}`)
+    const safeWidth = this.prepareWidth(width)
+    return this.expanded
+      ? this.renderExpanded(safeWidth)
+      : this.renderCompact(safeWidth)
   }
 }
 
@@ -295,14 +399,29 @@ export default function (pi: ExtensionAPI) {
         const details = result.details as DeltaEditDetails | undefined
 
         if (isEnabled() && details?.delta) {
-          return new DeltaDiffText(details.delta, bg(theme, 'toolSuccessBg'))
+          const component =
+            context.lastComponent instanceof DeltaDiffText &&
+            context.lastComponent.hasText(details.delta)
+              ? context.lastComponent
+              : new DeltaDiffText(details.delta, theme, options.expanded)
+          component.setTheme(theme)
+          component.setExpanded(options.expanded)
+          return component
         }
 
         if (isEnabled() && details?.deltaError) {
           return new Text(details.deltaError, 1, 1, bg(theme, 'toolErrorBg'))
         }
 
-        return base.renderResult?.(result, options, theme, context) ?? new Text('')
+        // DeltaDiffText and Text are not compatible with the Container reused by
+        // pi's built-in edit result renderer. Drop a prior custom component when
+        // switching back to the built-in path.
+        const baseContext =
+          context.lastComponent instanceof DeltaDiffText ||
+          context.lastComponent instanceof Text
+            ? { ...context, lastComponent: undefined }
+            : context
+        return base.renderResult?.(result, options, theme, baseContext) ?? new Text('')
       },
     })
   }

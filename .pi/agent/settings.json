@@ -4,7 +4,7 @@
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": true,
-  "quietStartup": true,
+  "quietStartup": false,
   "compaction": {
     "enabled": false
   },
@@ -17,7 +17,9 @@
     "preset": "default",
     "placement": "below",
     "welcome": true,
-    "disabledSegments": ["extension_statuses"]
+    "disabledSegments": [
+      "extension_statuses"
+    ]
   },
   "theme": "ayu-dark",
   "tuiMode": "fullscreen",
@@ -45,7 +47,9 @@
     "npm:pi-ask-user",
     {
       "source": "npm:@catdaemon/pi-cmux",
-      "extensions": ["-index.ts"]
+      "extensions": [
+        "-index.ts"
+      ]
     },
     "npm:@juicesharp/rpiv-btw",
     "npm:pi-cursor-sdk",
@@ -73,6 +77,15 @@
   "autocompleteMaxVisible": 10,
   "fullscreenExitOutput": "resume-hint",
   "fullscreenCopyOnSelect": true,
-  "extensions": ["-extensions/welcome.ts", "-extensions/delta-diff.ts"],
-  "workingVibe": "drumming"
+  "extensions": [
+    "-extensions/welcome.ts",
+    "+extensions/delta-diff.ts"
+  ],
+  "workingVibe": "drumming",
+  "modelThinkingLevels": {
+    "openai-codex/gpt-6-astra": "xhigh",
+    "openai-codex/gpt-5.6-sol": "high",
+    "openai-codex/gpt-5.6-luna": "xhigh",
+    "openai-codex/gpt-5.6-terra": "xhigh"
+  }
 }
