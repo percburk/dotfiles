@@ -61,7 +61,7 @@ customCommands:
         title: 'Commit message (edit or press Enter)'
         initialValue: '{{ runCommand (printf "lazygit-ai-commit %s" .Form.Type) }}'
     command: 'git commit -m {{ .Form.Message | quote }}'
-    loadingText: 'Committing...'
+    loadingText: 'Committing'
   # Create worktree from current branch (when in worktrees view)
   - key: 'N'
     context: 'worktrees'

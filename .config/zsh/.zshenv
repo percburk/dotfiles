@@ -7,6 +7,9 @@ export BUN_INSTALL="$HOME/.bun"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+export MCP_UI_VIEWER=none
+export LAZYGIT_AI_COMMIT_PI_MODEL="openai-codex/gpt-5.6-luna"
+export LAZYGIT_AI_COMMIT_PI_THINKING="minimal"
 
 # make Homebrew binaries visible to non-interactive ssh (mosh-server, herdr)
 case ":$PATH:" in
