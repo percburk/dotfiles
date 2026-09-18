@@ -4,7 +4,7 @@
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": true,
-  "quietStartup": false,
+  "quietStartup": true,
   "compaction": {
     "enabled": false
   },
@@ -16,7 +16,7 @@
   "powerline": {
     "preset": "default",
     "placement": "below",
-    "welcome": true,
+    "welcome": false,
     "disabledSegments": [
       "extension_statuses"
     ]
@@ -29,7 +29,12 @@
   "packages": [
     "npm:@juanibiapina/pi-extension-settings",
     "npm:pi-web-access",
-    "npm:pi-mcp-adapter",
+    {
+      "source": "npm:pi-mcp-adapter",
+      "skills": [
+        "+skills/mcp-scripting/SKILL.md"
+      ]
+    },
     {
       "source": "npm:@juanibiapina/pi-powerbar",
       "extensions": [
@@ -45,17 +50,16 @@
     },
     "npm:@juicesharp/rpiv-todo",
     "npm:pi-ask-user",
-    {
-      "source": "npm:@catdaemon/pi-cmux",
-      "extensions": [
-        "-index.ts"
-      ]
-    },
-    "npm:@juicesharp/rpiv-btw",
     "npm:pi-cursor-sdk",
     "npm:pi-simplify",
     "npm:pi-subagents",
-    "npm:pi-powerline-footer"
+    {
+      "source": "npm:pi-powerline-footer",
+      "extensions": [
+        "+index.ts"
+      ]
+    },
+    "npm:@narumitw/pi-btw"
   ],
   "enabledModels": [
     "cursor/composer-2.5:fast",
@@ -78,10 +82,10 @@
   "fullscreenExitOutput": "resume-hint",
   "fullscreenCopyOnSelect": true,
   "extensions": [
-    "-extensions/welcome.ts",
-    "+extensions/delta-diff.ts"
+    "+extensions/delta-diff.ts",
+    "+extensions/welcome.ts"
   ],
-  "workingVibe": "drumming",
+  "workingVibe": "communism",
   "modelThinkingLevels": {
     "openai-codex/gpt-6-astra": "xhigh",
     "openai-codex/gpt-5.6-sol": "high",

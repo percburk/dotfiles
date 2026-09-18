@@ -2,8 +2,8 @@
 
 set -eu
 
-MODEL="${LAZYGIT_AI_COMMIT_MODEL:-openai-codex/gpt-5.6-luna}"
-THINKING="${LAZYGIT_AI_COMMIT_THINKING:-minimal}"
+MODEL="${LAZYGIT_AI_COMMIT_PI_MODEL:-openai-codex/gpt-5.6-luna}"
+THINKING="${LAZYGIT_AI_COMMIT_PI_THINKING:-minimal}"
 MAX_DIFF_BYTES=65536
 ALLOWED_TYPES='feat|fix|refactor|perf|test|docs|build|ci|chore|style|revert'
 

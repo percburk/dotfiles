@@ -6,7 +6,7 @@
 		"right": "model"
 	},
 	"welcome": {
-		"enabled": "off",
+		"enabled": "on",
 		"gradient": "random",
 		"art": "random",
 		"temperatureUnit": "fahrenheit",
