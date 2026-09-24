@@ -33,6 +33,10 @@ status_indicators = "symbols"
 
 [ui.sidebar.spaces]
 row_gap = 1
+rows = [
+  ["$num", "state_icon", "workspace"],
+  ["branch", "git_status"],
+]
 
 [ui.toast]
 delivery = "terminal"
