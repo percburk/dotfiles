@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.1",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
@@ -76,7 +76,12 @@
     "cursor/opus-5@1m:fast",
     "cursor/opus-5@1m:slow",
     "cursor/composer-2.5",
-    "cursor/fable-5-1@300k"
+    "cursor/fable-5-1@300k",
+    "cursor/opus-5.5@300k",
+    "cursor/opus-5.5@1m:fast",
+    "cursor/opus-5.5@1m:slow",
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6-sol"
   ],
   "autocompleteMaxVisible": 10,
   "fullscreenExitOutput": "resume-hint",
@@ -85,7 +90,7 @@
     "+extensions/delta-diff.ts",
     "+extensions/welcome.ts"
   ],
-  "workingVibe": "communism",
+  "workingVibe": "playing with my dog Rue",
   "modelThinkingLevels": {
     "openai-codex/gpt-6-astra": "xhigh",
     "openai-codex/gpt-5.6-sol": "high",
