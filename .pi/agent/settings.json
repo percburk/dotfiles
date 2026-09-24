@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "lastChangelogVersion": "0.87.0",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
@@ -85,11 +85,12 @@
     "+extensions/delta-diff.ts",
     "+extensions/welcome.ts"
   ],
-  "workingVibe": "communism",
+  "workingVibe": "playing with my dog Rue",
   "modelThinkingLevels": {
     "openai-codex/gpt-6-astra": "xhigh",
     "openai-codex/gpt-5.6-sol": "high",
     "openai-codex/gpt-5.6-luna": "xhigh",
-    "openai-codex/gpt-5.6-terra": "xhigh"
+    "openai-codex/gpt-5.6-terra": "xhigh",
+    "cursor/composer-2.5": "off"
   }
 }
