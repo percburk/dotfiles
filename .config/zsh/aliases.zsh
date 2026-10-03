@@ -52,6 +52,7 @@ compdef eza=ls
 alias lg="lazygit"
 alias cx="codex"
 alias cc="claude"
+alias ag="agent"
 
 # dotfiles bare repo aliases
 alias cfg="/opt/homebrew/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"

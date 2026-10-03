@@ -27,6 +27,7 @@ words = [
     "classnames",
     "cli",
     "crowdin",
+    "cutover",
     "cva",
     "describedby",
     "dnd",

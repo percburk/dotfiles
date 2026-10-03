@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "1.0.1",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": true,
   "quietStartup": true,
@@ -30,12 +30,6 @@
     "npm:@juanibiapina/pi-extension-settings",
     "npm:pi-web-access",
     {
-      "source": "npm:pi-mcp-adapter",
-      "skills": [
-        "+skills/mcp-scripting/SKILL.md"
-      ]
-    },
-    {
       "source": "npm:@juanibiapina/pi-powerbar",
       "extensions": [
         "-src/powerbar/index.ts",
@@ -63,25 +57,15 @@
   ],
   "enabledModels": [
     "cursor/composer-2.5:fast",
-    "cursor/sonnet-5@300k",
-    "cursor/sonnet-5@1m",
-    "openai-codex/gpt-5.6-luna",
-    "openai-codex/gpt-5.6-sol",
-    "openai-codex/gpt-5.6-terra",
-    "cursor/opus-5@1m",
-    "cursor/opus-5@300k",
     "openai-codex/gpt-6-astra",
-    "cursor/grok-4.6:fast",
-    "cursor/grok-4.6:slow",
-    "cursor/opus-5@1m:fast",
-    "cursor/opus-5@1m:slow",
     "cursor/composer-2.5",
     "cursor/fable-5-1@300k",
     "cursor/opus-5.5@300k",
-    "cursor/opus-5.5@1m:fast",
     "cursor/opus-5.5@1m:slow",
     "openai-codex/gpt-6-luna",
-    "openai-codex/gpt-6-sol"
+    "openai-codex/gpt-6.1-sol",
+    "cursor/claude-sonnet-5-5@1m",
+    "cursor/claude-sonnet-5-5@300k"
   ],
   "autocompleteMaxVisible": 10,
   "fullscreenExitOutput": "resume-hint",
@@ -92,10 +76,9 @@
   ],
   "workingVibe": "playing with my dog Rue",
   "modelThinkingLevels": {
+    "openai-codex/gpt-6-luna": "xhigh",
     "openai-codex/gpt-6-astra": "xhigh",
-    "openai-codex/gpt-5.6-sol": "high",
-    "openai-codex/gpt-5.6-luna": "xhigh",
-    "openai-codex/gpt-5.6-terra": "xhigh",
-    "cursor/composer-2.5": "off"
-  }
+    "cursor/fable-5-1@300k": "xhigh"
+  },
+  "deviceId": "bc9f2922-6c98-48eb-8636-1a4d807e3917"
 }
