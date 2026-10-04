@@ -3,6 +3,55 @@
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.1-sol",
   "defaultThinkingLevel": "high",
+  "subagents": {
+    "defaultModel": "openai-codex/gpt-6.1-sol",
+    "defaultProvider": "openai-codex",
+    "defaultThinking": "medium",
+    "modelScope": {
+      "enforce": true,
+      "strict": true,
+      "allow": [
+        "openai-codex/*"
+      ]
+    },
+    "agentOverrides": {
+      "scout": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "low",
+        "fast": false
+      },
+      "researcher": {
+        "model": "openai-codex/gpt-6-luna",
+        "thinking": "medium",
+        "fast": false
+      },
+      "worker": {
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "medium",
+        "fast": false
+      },
+      "reviewer": {
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high",
+        "fast": false
+      },
+      "evidence-auditor": {
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "high",
+        "fast": false
+      },
+      "delegate": {
+        "model": "openai-codex/gpt-6.1-sol",
+        "thinking": "medium",
+        "fast": false
+      },
+      "oracle": {
+        "model": "openai-codex/gpt-6-astra",
+        "thinking": "xhigh",
+        "fast": false
+      }
+    }
+  },
   "hideThinkingBlock": true,
   "quietStartup": true,
   "compaction": {
@@ -74,7 +123,7 @@
     "+extensions/delta-diff.ts",
     "+extensions/welcome.ts"
   ],
-  "workingVibe": "playing with my dog Rue",
+  "workingVibe": "baking bread",
   "modelThinkingLevels": {
     "openai-codex/gpt-6-luna": "xhigh",
     "openai-codex/gpt-6-astra": "xhigh",
