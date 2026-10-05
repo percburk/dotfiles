@@ -5,13 +5,21 @@ alias sourcezsh="source $ZDOTDIR/.zshrc"
 alias zshconfig="nvim $ZDOTDIR/.zshrc"
 alias ghosttyconfig="nvim $XDG_CONFIG_HOME/ghostty/config"
 
-# yazi: replace cwd while traversing directories
+# yazi: resolve shortcuts with zoxide and replace cwd while traversing directories
 function y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  local target tmp cwd exit_code
+  if (( $# )) && [[ "$1" != -* && ! -d "$1" ]]; then
+    target="$(zoxide query -- "$1")" || return $?
+    set -- "$target" "${@:2}"
+  fi
+
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")" || return $?
   command yazi "$@" --cwd-file="$tmp"
+  exit_code=$?
   IFS= read -r -d '' cwd < "$tmp"
   [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
   rm -f -- "$tmp"
+  return "$exit_code"
 }
 
 # app aliases
