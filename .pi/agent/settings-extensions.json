@@ -17,6 +17,6 @@
 	},
 	"delta-diff": {
 		"enabled": "on",
-		"sideBySide": "on"
+		"layout": "auto"
 	}
 }

@@ -49,10 +49,10 @@
 # resize-overlay-duration = 4s 200ms
 
 background-blur = 3
-background-opacity = 1 
+background-opacity = 1
 background-image = ./images/oregon_coast.jpeg
 background-image-fit = cover
-background-image-opacity = 0.08
+background-image-opacity = 0.04
 confirm-close-surface = false
 cursor-click-to-move = true
 font-family = Geist Mono

@@ -11,6 +11,11 @@ export MCP_UI_VIEWER=none
 export LAZYGIT_AI_COMMIT_PI_MODEL="openai-codex/gpt-6-luna"
 export LAZYGIT_AI_COMMIT_PI_THINKING="minimal"
 
+# Cursor models in Pi: MCP-only, Pi owns file/shell/codemode tools and MCP servers.
+export PI_CURSOR_NATIVE_TOOLS=0
+export PI_CURSOR_EXPOSE_BUILTIN_TOOLS=1
+export PI_CURSOR_SETTING_SOURCES=none
+
 # make Homebrew binaries visible to non-interactive ssh (mosh-server, herdr)
 case ":$PATH:" in
   *":/opt/homebrew/bin:"*) ;;

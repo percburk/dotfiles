@@ -162,8 +162,8 @@ gui:
       - '#F26D78'
     defaultFgColor:
       - '#BFBDB6'
-  authorColors:
-    '*': '#D2A6FF'
+    authorColors:
+      '*': '#D2A6FF'
 git:
   diffRenderers:
     - colorArg: always

@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "1.0.2",
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6.1-sol",
+  "lastChangelogVersion": "1.4.0",
+  "defaultProvider": "cursor",
+  "defaultModel": "opus-5.5@300k",
   "defaultThinkingLevel": "high",
   "subagents": {
     "defaultModel": "openai-codex/gpt-6.1-sol",
@@ -105,22 +105,19 @@
     "npm:@narumitw/pi-btw"
   ],
   "enabledModels": [
-    "cursor/composer-2.5:fast",
     "openai-codex/gpt-6-astra",
-    "cursor/composer-2.5",
     "cursor/fable-5-1@300k",
     "cursor/opus-5.5@300k",
-    "cursor/opus-5.5@1m:slow",
     "openai-codex/gpt-6-luna",
     "openai-codex/gpt-6.1-sol",
-    "cursor/claude-sonnet-5-5@1m",
-    "cursor/claude-sonnet-5-5@300k"
+    "cursor/claude-sonnet-5-5@300k",
+    "cursor/claude-haiku-5-5@300k"
   ],
   "autocompleteMaxVisible": 10,
   "fullscreenExitOutput": "resume-hint",
   "fullscreenCopyOnSelect": true,
   "extensions": [
-    "+extensions/delta-diff.ts",
+    "+extensions/delta-diff/index.ts",
     "+extensions/welcome.ts"
   ],
   "workingVibe": "baking bread",

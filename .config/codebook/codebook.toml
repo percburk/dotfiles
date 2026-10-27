@@ -2,6 +2,7 @@ dictionaries = ["en_us"]
 words = [
     "CEB",
     "DTO",
+    "Dialogs",
     "FLYER",
     "Jira",
     "KEYFOB",
