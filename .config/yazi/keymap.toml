@@ -4,3 +4,8 @@ on = ["g", "D"]
 run = "cd ~/Desktop"
 desc = "Go to ~/Desktop"
 
+
+[[mgr.prepend_keymap]]
+on = "s"
+run = "plugin flash"
+desc = "Flash Search"

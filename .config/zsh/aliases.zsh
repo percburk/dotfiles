@@ -26,7 +26,8 @@ function y() {
 alias arc="open -a Arc"
 alias chrome="open -a 'Google Chrome'"
 alias spotify="open -a Spotify"
-alias slack="open -a Slack"
+# slack CLI needs this
+# alias slack="open -a Slack"
 alias postico="open -a Postico"
 alias sourcetree="open -a Sourcetree"
 alias helium="open -a Helium"
