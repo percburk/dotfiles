@@ -10,6 +10,8 @@ export VISUAL="nvim"
 export MCP_UI_VIEWER=none
 export LAZYGIT_AI_COMMIT_PI_MODEL="openai-codex/gpt-6-luna"
 export LAZYGIT_AI_COMMIT_PI_THINKING="minimal"
+export VOICEINK_PI_MODEL="openai-codex/gpt-6-luna"
+export VOICEINK_PI_THINKING="minimal"
 
 # Cursor models in Pi: MCP-only, Pi owns file/shell/codemode tools and MCP servers.
 export PI_CURSOR_NATIVE_TOOLS=0
