@@ -65,9 +65,9 @@ keybind = super+u=new_split:up
 keybind = super+\=new_split:right
 keybind = global:cmd+backquote=toggle_quick_terminal
 macos-icon = custom-style
-macos-icon-frame = beige
-macos-icon-ghost-color = #FFB000
-macos-icon-screen-color = #222327
+macos-icon-frame = plastic
+macos-icon-ghost-color = #D2A6FF
+macos-icon-screen-color = #141821
 mouse-hide-while-typing = true
 quick-terminal-animation-duration = 0.15
 quick-terminal-size = 300px,800px
