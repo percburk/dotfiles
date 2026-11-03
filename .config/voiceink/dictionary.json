@@ -1,0 +1,359 @@
+{
+  "format": "voiceink.dictionary",
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-30T00:00:00Z",
+  "vocabulary": [
+    {
+      "term": "Anytime Fitness"
+    },
+    {
+      "term": "Orangetheory"
+    },
+    {
+      "term": "ASP.NET Core"
+    },
+    {
+      "term": "Chart.js"
+    },
+    {
+      "term": "CleverTap"
+    },
+    {
+      "term": "Dynatrace"
+    },
+    {
+      "term": "Entra"
+    },
+    {
+      "term": "Evolt"
+    },
+    {
+      "term": "FormatJS"
+    },
+    {
+      "term": "Ghostty"
+    },
+    {
+      "term": "Key Vault"
+    },
+    {
+      "term": "Lightning CSS"
+    },
+    {
+      "term": "Luxon"
+    },
+    {
+      "term": "Medallia"
+    },
+    {
+      "term": "Neovim"
+    },
+    {
+      "term": "Newtonsoft"
+    },
+    {
+      "term": "Noda Time"
+    },
+    {
+      "term": "RudderStack"
+    },
+    {
+      "term": "shadcn"
+    },
+    {
+      "term": "SignalR"
+    },
+    {
+      "term": "TanStack"
+    },
+    {
+      "term": "Trivago"
+    },
+    {
+      "term": "Vite"
+    },
+    {
+      "term": "Zustand"
+    },
+    {
+      "term": "Burk"
+    },
+    {
+      "term": "SPOG"
+    },
+    {
+      "term": "spog-ui"
+    },
+    {
+      "term": "consumer-join-ui"
+    },
+    {
+      "term": "Purpose Brands"
+    },
+    {
+      "term": "Next.js"
+    },
+    {
+      "term": "React"
+    },
+    {
+      "term": "TypeScript"
+    },
+    {
+      "term": "App Router"
+    },
+    {
+      "term": "Server Components"
+    },
+    {
+      "term": "Server Actions"
+    },
+    {
+      "term": "Turbopack"
+    },
+    {
+      "term": "SWC"
+    },
+    {
+      "term": "JSX"
+    },
+    {
+      "term": "TSX"
+    },
+    {
+      "term": "useState"
+    },
+    {
+      "term": "useEffect"
+    },
+    {
+      "term": "useMemo"
+    },
+    {
+      "term": "useCallback"
+    },
+    {
+      "term": "useRef"
+    },
+    {
+      "term": "useQuery"
+    },
+    {
+      "term": "useMutation"
+    },
+    {
+      "term": "useForm"
+    },
+    {
+      "term": "Tailwind"
+    },
+    {
+      "term": "Tailwind CSS"
+    },
+    {
+      "term": "PostCSS"
+    },
+    {
+      "term": "Base UI"
+    },
+    {
+      "term": "Heroicons"
+    },
+    {
+      "term": "Lucide"
+    },
+    {
+      "term": "Sonner"
+    },
+    {
+      "term": "Embla Carousel"
+    },
+    {
+      "term": "Recharts"
+    },
+    {
+      "term": "TanStack Query"
+    },
+    {
+      "term": "TanStack Table"
+    },
+    {
+      "term": "React Query"
+    },
+    {
+      "term": "React Hook Form"
+    },
+    {
+      "term": "Zod"
+    },
+    {
+      "term": "React Intl"
+    },
+    {
+      "term": "Crowdin"
+    },
+    {
+      "term": "Hey API"
+    },
+    {
+      "term": "OpenAPI"
+    },
+    {
+      "term": "LaunchDarkly"
+    },
+    {
+      "term": "Stripe"
+    },
+    {
+      "term": "Stripe Connect"
+    },
+    {
+      "term": "PactSafe"
+    },
+    {
+      "term": "Better Auth"
+    },
+    {
+      "term": "Redis"
+    },
+    {
+      "term": "Snowflake"
+    },
+    {
+      "term": "Pino"
+    },
+    {
+      "term": "ExcelJS"
+    },
+    {
+      "term": "ESLint"
+    },
+    {
+      "term": "Prettier"
+    },
+    {
+      "term": "Husky"
+    },
+    {
+      "term": "lint-staged"
+    },
+    {
+      "term": "Playwright"
+    },
+    {
+      "term": "Allure"
+    },
+    {
+      "term": "Proxyman"
+    },
+    {
+      "term": "npm"
+    },
+    {
+      "term": "AWS CDK"
+    },
+    {
+      "term": "CodeArtifact"
+    },
+    {
+      "term": "FireLens"
+    },
+    {
+      "term": "afca"
+    },
+    {
+      "term": "Koji"
+    },
+    {
+      "term": "muuv"
+    },
+    {
+      "term": "sebrands"
+    },
+    {
+      "term": "SheepDip"
+    },
+    {
+      "term": "woms"
+    },
+    {
+      "term": "consumer-join-bff"
+    },
+    {
+      "term": "crm-service"
+    },
+    {
+      "term": "engagement-log-service"
+    },
+    {
+      "term": "goal-service"
+    },
+    {
+      "term": "identity-service"
+    },
+    {
+      "term": "lead-service"
+    },
+    {
+      "term": "location-service"
+    },
+    {
+      "term": "note-service"
+    },
+    {
+      "term": "person-service"
+    },
+    {
+      "term": "purchase-service"
+    },
+    {
+      "term": "schedule-service"
+    },
+    {
+      "term": "spog-bff"
+    },
+    {
+      "term": "spog-mockup"
+    },
+    {
+      "term": "spog-mockup-conversations"
+    },
+    {
+      "term": "spog-mockup-customers"
+    },
+    {
+      "term": "spog-mockup-locations"
+    },
+    {
+      "term": "spog-mockup-national-offer-management"
+    },
+    {
+      "term": "spog-mockup-offers"
+    },
+    {
+      "term": "spog-mockup-online-signup"
+    },
+    {
+      "term": "spog-mockup-opportunities"
+    },
+    {
+      "term": "spog-mockup-product-catalog"
+    },
+    {
+      "term": "spog-mockup-reporting"
+    },
+    {
+      "term": "spog-mockup-scheduling"
+    },
+    {
+      "term": "spog-mockup-staff-mgmt"
+    },
+    {
+      "term": "spog-mockup-tasks"
+    },
+    {
+      "term": "codemode"
+    }
+  ],
+  "replacements": []
+}

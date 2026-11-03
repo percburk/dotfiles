@@ -1,0 +1,34 @@
+#!/bin/zsh
+# VoiceInk Local CLI wrapper: replaces the first "@prompt <name> [@thinking <level>]" in
+# the system prompt with prompts/<name>.md, tags the frontmost app, and runs Pi.
+# Only the first match counts: VoiceInk appends screen/clipboard context after the
+# Mode's prompt, and that context can contain "@prompt" text of its own.
+set -eu
+
+prompt_dir=${0:A:h}/prompts
+model=${VOICEINK_PI_MODEL:-openai-codex/gpt-6-luna}
+thinking=minimal
+system_prompt=$VOICEINK_SYSTEM_PROMPT
+
+if [[ $system_prompt =~ '@prompt ([A-Za-z0-9_-]+)( +@thinking +([a-z]+))?' ]]; then
+  directive=$MATCH
+  name=$match[1]
+  thinking=${match[3]:-$thinking}
+  file=$prompt_dir/$name.md
+  if [[ ! -f $file ]]; then
+    print -u2 "voiceink-pi: no prompt file at $file"
+    exit 1
+  fi
+  if [[ $thinking != (off|minimal|low|medium|high|xhigh|max) ]]; then
+    print -u2 "voiceink-pi: unknown thinking level '$thinking'"
+    exit 1
+  fi
+  system_prompt=${system_prompt/"$directive"/$(<$file)}
+fi
+
+app=$(lsappinfo info -only name "$(lsappinfo front)" | cut -d'"' -f4)
+
+exec /Users/kevin.burk/.pi/agent/bin/pi -ne -ns -nc -np --no-mcp --no-tools --no-session --offline -p \
+  --model "$model" --thinking "$thinking" \
+  --system-prompt "$system_prompt" \
+  "$VOICEINK_USER_PROMPT"$'\n'"<ACTIVE_APP>$app</ACTIVE_APP>"

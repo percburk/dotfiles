@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "defaultProvider": "cursor",
   "defaultModel": "opus-5.5@300k",
   "defaultThinkingLevel": "high",
@@ -126,5 +126,11 @@
     "openai-codex/gpt-6-astra": "xhigh",
     "cursor/fable-5-1@300k": "xhigh"
   },
-  "deviceId": "bc9f2922-6c98-48eb-8636-1a4d807e3917"
+  "deviceId": "bc9f2922-6c98-48eb-8636-1a4d807e3917",
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.46.0",
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.8",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.84.0",
+    "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0"
+  }
 }
