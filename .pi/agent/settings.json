@@ -4,36 +4,40 @@
   "defaultModel": "opus-5.5@300k",
   "defaultThinkingLevel": "high",
   "subagents": {
-    "defaultModel": "openai-codex/gpt-6.1-sol",
-    "defaultProvider": "openai-codex",
+    "defaultModel": "cursor/claude-sonnet-5-5@300k",
+    "defaultProvider": "cursor",
     "defaultThinking": "medium",
     "modelScope": {
       "enforce": true,
       "strict": true,
       "allow": [
-        "openai-codex/*"
+        "openai-codex/*",
+        "cursor/*"
       ]
     },
     "agentOverrides": {
       "scout": {
-        "model": "openai-codex/gpt-6-luna",
+        "model": "cursor/claude-haiku-5-5@300k",
         "thinking": "low",
-        "fast": false
+        "fast": false,
+        "advertise": true
       },
       "researcher": {
-        "model": "openai-codex/gpt-6-luna",
+        "model": "cursor/claude-sonnet-5-5@300k",
         "thinking": "medium",
-        "fast": false
+        "fast": false,
+        "advertise": true
       },
       "worker": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "cursor/claude-sonnet-5-5@300k",
         "thinking": "medium",
         "fast": false
       },
       "reviewer": {
         "model": "openai-codex/gpt-6.1-sol",
         "thinking": "high",
-        "fast": false
+        "fast": false,
+        "advertise": true
       },
       "evidence-auditor": {
         "model": "openai-codex/gpt-6.1-sol",
@@ -41,14 +45,14 @@
         "fast": false
       },
       "delegate": {
-        "model": "openai-codex/gpt-6.1-sol",
         "thinking": "medium",
         "fast": false
       },
       "oracle": {
-        "model": "openai-codex/gpt-6-astra",
+        "model": "cursor/claude-opus-5-5@300k",
         "thinking": "xhigh",
-        "fast": false
+        "fast": false,
+        "advertise": true
       }
     }
   },
@@ -91,7 +95,6 @@
         "-node_modules/@juanibiapina/pi-usage/index.ts"
       ]
     },
-    "npm:@juicesharp/rpiv-todo",
     "npm:pi-ask-user",
     "npm:pi-cursor-sdk",
     "npm:pi-simplify",
@@ -120,7 +123,7 @@
     "+extensions/delta-diff/index.ts",
     "+extensions/welcome.ts"
   ],
-  "workingVibe": "baking bread",
+  "workingVibe": "synthesizers",
   "modelThinkingLevels": {
     "openai-codex/gpt-6-luna": "xhigh",
     "openai-codex/gpt-6-astra": "xhigh",
@@ -128,9 +131,10 @@
   },
   "deviceId": "bc9f2922-6c98-48eb-8636-1a4d807e3917",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.46.0",
-    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.8",
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.84.0",
-    "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0"
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.11",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.86.0",
+    "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.4"
   }
 }

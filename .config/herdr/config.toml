@@ -63,10 +63,14 @@ height = "60%"
 [[keys.command]]
 key = "prefix+d"
 type = "shell"
-command = '''
-pane=$(herdr pane split --pane "$HERDR_ACTIVE_PANE_ID" --direction right --cwd "$HERDR_ACTIVE_PANE_CWD" --focus | jq -r '.result.pane.pane_id // empty') && [ -n "$pane" ] && herdr pane run "$pane" "hunk diff"
-'''
-description = "hunk diff in right split"
+command = '~/.config/herdr/scripts/split-right.sh "hunk diff"'
+description = "hunk: diff in right split"
+
+[[keys.command]]
+key = "prefix+a"
+type = "shell"
+command = '~/.config/herdr/scripts/split-right.sh hch'
+description = "hunk: all branch changes vs origin default in right split"
 
 [[keys.command]]
 key = "prefix+up"

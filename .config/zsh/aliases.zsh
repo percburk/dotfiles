@@ -42,6 +42,18 @@ alias gch="git checkout"
 alias gb="git branch"
 alias gsh="git stash"
 
+# hunk: review everything on this branch (commits + uncommitted) vs. origin's default branch, like a PR
+function hch() {
+  local ref base
+  for ref in origin/HEAD origin/main origin/master; do
+    git rev-parse -q --verify "$ref^{commit}" >/dev/null && break
+    ref=
+  done
+  [[ -n $ref ]] || { echo "hch: no origin/HEAD, origin/main or origin/master" >&2; return 1; }
+  base="$(git merge-base "$ref" HEAD)" || return $?
+  hunk diff "$base" "$@"
+}
+
 # postgres aliases
 alias startp="brew services start postgresql@14"
 alias stopp="brew services stop postgresql@14"
