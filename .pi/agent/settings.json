@@ -34,13 +34,13 @@
         "fast": false
       },
       "reviewer": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "cursor/gpt-5.6-sol@272k",
         "thinking": "high",
         "fast": false,
         "advertise": true
       },
       "evidence-auditor": {
-        "model": "openai-codex/gpt-6.1-sol",
+        "model": "cursor/gpt-5.6-sol@272k",
         "thinking": "high",
         "fast": false
       },
@@ -108,11 +108,9 @@
     "npm:@narumitw/pi-btw"
   ],
   "enabledModels": [
-    "openai-codex/gpt-6-astra",
     "cursor/fable-5-1@300k",
     "cursor/opus-5.5@300k",
-    "openai-codex/gpt-6-luna",
-    "openai-codex/gpt-6.1-sol",
+    "cursor/gpt-5.6-sol@272k",
     "cursor/claude-sonnet-5-5@300k",
     "cursor/claude-haiku-5-5@300k"
   ],
@@ -123,18 +121,16 @@
     "+extensions/delta-diff/index.ts",
     "+extensions/welcome.ts"
   ],
-  "workingVibe": "synthesizers",
   "modelThinkingLevels": {
-    "openai-codex/gpt-6-luna": "xhigh",
-    "openai-codex/gpt-6-astra": "xhigh",
+    "cursor/gpt-5.6-sol@272k": "xhigh",
     "cursor/fable-5-1@300k": "xhigh"
   },
   "deviceId": "bc9f2922-6c98-48eb-8636-1a4d807e3917",
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
-    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.11",
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.86.0",
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.17",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.87.0",
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.4"
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.5"
   }
 }

@@ -2,8 +2,6 @@
 
 set -eu
 
-MODEL="${LAZYGIT_AI_COMMIT_PI_MODEL:-openai-codex/gpt-5.6-luna}"
-THINKING="${LAZYGIT_AI_COMMIT_PI_THINKING:-minimal}"
 MAX_DIFF_BYTES=65536
 ALLOWED_TYPES='feat|fix|refactor|perf|test|docs|build|ci|chore|style|revert'
 
@@ -47,20 +45,7 @@ if ! output=$(
     printf '\nStaged patch, truncated to %s bytes:\n' "$MAX_DIFF_BYTES"
     git diff --cached --no-ext-diff --no-color --unified=3 | head -c "$MAX_DIFF_BYTES"
   } |
-    PI_SKIP_VERSION_CHECK=1 pi \
-      -p \
-      --model "$MODEL" \
-      --thinking "$THINKING" \
-      --no-session \
-      --no-tools \
-      --no-extensions \
-      --no-skills \
-      --no-prompt-templates \
-      --no-themes \
-      --no-context-files \
-      --no-approve \
-      --system-prompt "$system_prompt" \
-      2>/dev/null
+    pi-quick --system-prompt "$system_prompt" 2>/dev/null
 ); then
   fail 'Pi failed to generate a commit message.'
 fi

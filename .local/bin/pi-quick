@@ -1,0 +1,30 @@
+#!/bin/sh
+# One-shot headless Pi CLI call, loading only the pi-cursor-sdk extension
+# Exits 124 when the call passes PI_QUICK_TIMEOUT.
+#
+# PI_QUICK_MODEL     model id (default cursor/claude-haiku-5-5@300k)
+# PI_QUICK_TIMEOUT   seconds before giving up (default 30)
+# --thinking LEVEL   defaults to minimal; a caller's --thinking wins (pi keeps the last)
+
+set -eu
+
+PI=/Users/kevin.burk/.pi/agent/bin/pi
+CURSOR_EXT=/Users/kevin.burk/.pi/agent/npm/node_modules/pi-cursor-sdk/dist/index.js
+MODEL="${PI_QUICK_MODEL:-cursor/claude-haiku-5-5@300k}"
+TIMEOUT="${PI_QUICK_TIMEOUT:-30}"
+
+# GUI callers such as VoiceInk never read ~/.config/zsh/.zshenv.
+case ":$PATH:" in
+  *":/opt/homebrew/bin:"*) ;;
+  *) PATH="$PATH:/opt/homebrew/bin" ;;
+esac
+export PATH
+export PI_CURSOR_NATIVE_TOOLS="${PI_CURSOR_NATIVE_TOOLS:-0}"
+export PI_CURSOR_SETTING_SOURCES="${PI_CURSOR_SETTING_SOURCES:-none}"
+export PI_SKIP_VERSION_CHECK=1
+
+exec timeout -k 5 "$TIMEOUT" "$PI" \
+  -ne -e "$CURSOR_EXT" \
+  -ns -nc -np --no-themes --no-mcp --no-tools --no-session --no-approve --offline \
+  -p --model "$MODEL" --thinking minimal \
+  "$@"

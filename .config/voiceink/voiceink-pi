@@ -1,12 +1,12 @@
 #!/bin/zsh
 # VoiceInk Local CLI wrapper: replaces the first "@prompt <name> [@thinking <level>]" in
-# the system prompt with prompts/<name>.md, tags the frontmost app, and runs Pi.
+# the system prompt with prompts/<name>.md, tags the frontmost app, and runs pi-quick.
+# If pi-quick times out, prints the raw transcript instead.
 # Only the first match counts: VoiceInk appends screen/clipboard context after the
 # Mode's prompt, and that context can contain "@prompt" text of its own.
 set -eu
 
 prompt_dir=${0:A:h}/prompts
-model=${VOICEINK_PI_MODEL:-openai-codex/gpt-6-luna}
 thinking=minimal
 system_prompt=$VOICEINK_SYSTEM_PROMPT
 
@@ -28,7 +28,15 @@ fi
 
 app=$(lsappinfo info -only name "$(lsappinfo front)" | cut -d'"' -f4)
 
-exec /Users/kevin.burk/.pi/agent/bin/pi -ne -ns -nc -np --no-mcp --no-tools --no-session --offline -p \
-  --model "$model" --thinking "$thinking" \
+rc=0
+output=$(/Users/kevin.burk/.local/bin/pi-quick --thinking "$thinking" \
   --system-prompt "$system_prompt" \
-  "$VOICEINK_USER_PROMPT"$'\n'"<ACTIVE_APP>$app</ACTIVE_APP>"
+  "$VOICEINK_USER_PROMPT"$'\n'"<ACTIVE_APP>$app</ACTIVE_APP>") || rc=$?
+
+if (( rc == 124 || rc == 137 )); then
+  print -u2 "voiceink-pi: model timed out, printing the raw transcript"
+  print -rn -- "${VOICEINK_TRANSCRIPT:-}"
+  exit 0
+fi
+(( rc == 0 )) || exit $rc
+print -r -- "$output"
