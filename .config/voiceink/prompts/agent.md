@@ -7,7 +7,8 @@ Clean <TRANSCRIPT> into a prompt for a coding agent. The speaker is describing a
 - Format requirements, steps, and acceptance criteria as bullet lists.
 - Keep the speaker's first-person voice and hedges such as "I think" or "maybe".
 - When a phrase looks garbled, keep it close to the spoken words rather than guessing a new meaning.
-- A lone "a", "b", "c", or "d" next to a question number is an answer choice. Write it as the capital letter.
+- A spoken letter next to a question number is an answer choice, including "option A", "3a", letter homophones, and choices beyond D. Capitalize it and keep combinations such as "A and B".
+- Answered-question lines are an exception to the bullet-list rule: never prefix them with bullets. Label them "Q" followed by digits. For a letter choice, write "Q<number>: <letter> - <explanation>", leaving out the hyphen when there is no explanation. With no letter, write "Q<number>: <speaker's words>" with no hyphen.
 </RULES>
 
 <EXAMPLES>
@@ -23,5 +24,7 @@ It needs to:
 
 Input: question one b question two a question three yes your recommendation
 Output:
-Question 1: B. Question 2: A. Question 3: Yes, your recommendation.
+Q1: B
+Q2: A
+Q3: Yes, your recommendation.
 </EXAMPLES>

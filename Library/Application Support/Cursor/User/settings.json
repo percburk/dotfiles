@@ -250,6 +250,7 @@
   "workbench.startupEditor": "newUntitledFile",
   "workbench.agentsWindowButton.enabled": false,
   "extensions.installCooldownHours": 72,
-  "cursor.composer.conversationDensity": "compact-ungrouped",
-  "cursor.composer.shouldChimeAfterChatFinishes": true
+  "cursor.composer.conversationDensity": "detailed",
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.chatMaxWidth": 1080
 }

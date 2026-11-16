@@ -1,7 +1,7 @@
 {
-  "lastChangelogVersion": "1.5.0",
+  "lastChangelogVersion": "1.5.2",
   "defaultProvider": "cursor",
-  "defaultModel": "opus-5.5@300k",
+  "defaultModel": "claude-opus-5-5@300k",
   "defaultThinkingLevel": "high",
   "subagents": {
     "defaultModel": "cursor/claude-sonnet-5-5@300k",
@@ -29,7 +29,7 @@
         "advertise": true
       },
       "worker": {
-        "model": "cursor/claude-sonnet-5-5@300k",
+        "model": "cursor/claude-opus-5-5@300k",
         "thinking": "medium",
         "fast": false
       },
@@ -49,8 +49,8 @@
         "fast": false
       },
       "oracle": {
-        "model": "cursor/claude-opus-5-5@300k",
-        "thinking": "xhigh",
+        "model": "cursor/claude-fable-5-2@300k",
+        "thinking": "high",
         "fast": false,
         "advertise": true
       }
@@ -108,11 +108,14 @@
     "npm:@narumitw/pi-btw"
   ],
   "enabledModels": [
-    "cursor/fable-5-1@300k",
-    "cursor/opus-5.5@300k",
     "cursor/gpt-5.6-sol@272k",
     "cursor/claude-sonnet-5-5@300k",
-    "cursor/claude-haiku-5-5@300k"
+    "cursor/claude-haiku-5-5@300k",
+    "cursor/claude-opus-5-5@300k",
+    "cursor/claude-fable-5-2@300k",
+    "cursor/muse-wonder-1.0@300k",
+    "cursor/grok-4.7@256k",
+    "cursor/grok-4.7@256k:fast"
   ],
   "autocompleteMaxVisible": 10,
   "fullscreenExitOutput": "resume-hint",
@@ -127,10 +130,10 @@
   },
   "deviceId": "bc9f2922-6c98-48eb-8636-1a4d807e3917",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
-    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.17",
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.87.0",
+    "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.41",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.88.1",
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
-    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.5"
+    "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.8"
   }
 }
