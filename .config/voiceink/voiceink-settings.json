@@ -1,0 +1,549 @@
+{
+  "customCloudModels" : [
+
+  ],
+  "customEmojis" : [
+
+  ],
+  "modeConfigs" : [
+    {
+      "id" : "10000000-0000-0000-0000-000000000001",
+      "selectedTranscriptionModelName" : "parakeet-ultra",
+      "icon" : {
+        "value" : "mic.fill",
+        "kind" : "symbol"
+      },
+      "useSelectedTextContext" : false,
+      "autoSendKey" : "none",
+      "isAIEnhancementEnabled" : false,
+      "isRealtimeTranscriptionEnabled" : true,
+      "isTextFormattingEnabled" : true,
+      "useScreenCapture" : false,
+      "selectedLanguage" : "auto",
+      "isDefault" : true,
+      "isEnabled" : true,
+      "outputMode" : "paste",
+      "name" : "Dictation",
+      "useClipboardContext" : false
+    },
+    {
+      "id" : "AABE19EA-08DE-46B9-9847-122EB091ADC7",
+      "selectedTranscriptionModelName" : "parakeet-ultra",
+      "icon" : {
+        "value" : "bubble.left.and.text.bubble.right.fill",
+        "kind" : "symbol"
+      },
+      "useSelectedTextContext" : false,
+      "autoSendKey" : "none",
+      "isAIEnhancementEnabled" : true,
+      "isRealtimeTranscriptionEnabled" : true,
+      "isTextFormattingEnabled" : true,
+      "useScreenCapture" : false,
+      "selectedLanguage" : "auto",
+      "selectedPrompt" : "319B8250-6366-4809-8ADA-2F218FCD51BE",
+      "selectedAIProvider" : "Local CLI",
+      "isEnabled" : true,
+      "isDefault" : false,
+      "outputMode" : "paste",
+      "name" : "Informal",
+      "useClipboardContext" : false
+    },
+    {
+      "id" : "6FE38397-64E4-4CDA-8610-02921228D8D3",
+      "selectedTranscriptionModelName" : "parakeet-ultra",
+      "icon" : {
+        "value" : "apple.terminal.fill",
+        "kind" : "symbol"
+      },
+      "useSelectedTextContext" : true,
+      "autoSendKey" : "none",
+      "isAIEnhancementEnabled" : true,
+      "isRealtimeTranscriptionEnabled" : true,
+      "isTextFormattingEnabled" : true,
+      "useScreenCapture" : false,
+      "selectedLanguage" : "auto",
+      "selectedPrompt" : "971F55B2-C54E-4F13-B56C-A46C101FEA40",
+      "selectedAIProvider" : "Local CLI",
+      "isEnabled" : true,
+      "isDefault" : false,
+      "outputMode" : "paste",
+      "name" : "Agent Prompt",
+      "useClipboardContext" : false
+    },
+    {
+      "id" : "C62554FE-5E0C-4C50-8906-E6BC232C21B6",
+      "selectedTranscriptionModelName" : "parakeet-ultra",
+      "icon" : {
+        "value" : "receipt.fill",
+        "kind" : "symbol"
+      },
+      "useSelectedTextContext" : true,
+      "autoSendKey" : "none",
+      "isAIEnhancementEnabled" : true,
+      "isRealtimeTranscriptionEnabled" : true,
+      "isTextFormattingEnabled" : true,
+      "useScreenCapture" : false,
+      "selectedLanguage" : "auto",
+      "selectedPrompt" : "16D54B44-110F-4B16-B902-A263ABC8E33D",
+      "selectedAIProvider" : "Local CLI",
+      "isEnabled" : true,
+      "isDefault" : false,
+      "outputMode" : "paste",
+      "name" : "Jira Ticket",
+      "useClipboardContext" : false
+    },
+    {
+      "id" : "CC43997A-9580-4678-A962-D129EEC6873A",
+      "selectedTranscriptionModelName" : "parakeet-ultra",
+      "icon" : {
+        "value" : "tray.full.fill",
+        "kind" : "symbol"
+      },
+      "useSelectedTextContext" : false,
+      "autoSendKey" : "none",
+      "isAIEnhancementEnabled" : true,
+      "isRealtimeTranscriptionEnabled" : true,
+      "isTextFormattingEnabled" : true,
+      "useScreenCapture" : true,
+      "selectedLanguage" : "auto",
+      "selectedPrompt" : "3788B40A-FC44-420C-A2E7-F010D31A2A0E",
+      "selectedAIProvider" : "Local CLI",
+      "isEnabled" : true,
+      "isDefault" : false,
+      "outputMode" : "paste",
+      "name" : "Saute Answers",
+      "useClipboardContext" : false
+    }
+  ],
+  "generalSettings" : {
+    "isMenuBarOnly" : true,
+    "secondaryRecordingShortcutRawValue" : "none",
+    "isPauseMediaEnabled" : true,
+    "recorderType" : "notch",
+    "finishAndSendKey" : "none",
+    "primaryRecordingShortcutModeRawValue" : "hybrid",
+    "clipboardRestoreDelay" : 2,
+    "isSystemMuteEnabled" : true,
+    "appAppearancePreference" : "system",
+    "restoreClipboardAfterPaste" : true,
+    "pasteLastEnhancementShortcut" : {
+      "keyCode" : 14,
+      "kind" : "key",
+      "modifierFlagsRawValue" : 8650752
+    },
+    "isAutoLearnDictionaryEnabled" : true,
+    "transcriptionRetentionMinutes" : 1440,
+    "pasteMethod" : "default",
+    "audioRetentionPeriod" : 7,
+    "secondaryRecordingShortcutModeRawValue" : "hybrid",
+    "isAudioCleanupEnabled" : false,
+    "primaryRecordingShortcut" : {
+      "keyCode" : 49,
+      "kind" : "key",
+      "modifierFlagsRawValue" : 8388608
+    },
+    "audioResumptionDelay" : 0,
+    "autoLearnAIReviewMode" : "automatic",
+    "isTextFormattingEnabled" : true,
+    "autoLearnMinimumCorrections" : 1,
+    "retryLastTranscriptionShortcut" : {
+      "keyCode" : 15,
+      "kind" : "key",
+      "modifierFlagsRawValue" : 8650752
+    },
+    "appLanguagePreference" : "system",
+    "primaryRecordingShortcutRawValue" : "custom",
+    "isTranscriptionCleanupEnabled" : false,
+    "isExperimentalFeaturesEnabled" : false,
+    "launchAtLoginEnabled" : false,
+    "pasteLastTranscriptionShortcut" : {
+      "keyCode" : 9,
+      "kind" : "key",
+      "modifierFlagsRawValue" : 8650752
+    },
+    "smartPunctuationEnabled" : false
+  },
+  "version" : "2.27",
+  "customPrompts" : [
+    {
+      "title" : "Agent",
+      "promptText" : "@prompt agent @thinking low",
+      "id" : "971F55B2-C54E-4F13-B56C-A46C101FEA40",
+      "useSystemInstructions" : true
+    },
+    {
+      "title" : "Jira ",
+      "promptText" : "@prompt jira @thinking low",
+      "id" : "16D54B44-110F-4B16-B902-A263ABC8E33D",
+      "useSystemInstructions" : false
+    },
+    {
+      "title" : "Informal",
+      "promptText" : "@prompt informal @thinking minimal",
+      "id" : "319B8250-6366-4809-8ADA-2F218FCD51BE",
+      "useSystemInstructions" : false
+    },
+    {
+      "title" : "Saute Answers",
+      "promptText" : "@prompt saute-answers @thinking low",
+      "id" : "3788B40A-FC44-420C-A2E7-F010D31A2A0E",
+      "useSystemInstructions" : true
+    }
+  ],
+  "vocabularyWords" : [
+    {
+      "word" : "Anytime Fitness"
+    },
+    {
+      "word" : "afca"
+    },
+    {
+      "word" : "Orangetheory"
+    },
+    {
+      "word" : "spog-mockup-staff-mgmt"
+    },
+    {
+      "word" : "spog-bff"
+    },
+    {
+      "word" : "TanStack Table"
+    },
+    {
+      "word" : "SPOG"
+    },
+    {
+      "word" : "muuv"
+    },
+    {
+      "word" : "Better Auth"
+    },
+    {
+      "word" : "Burk"
+    },
+    {
+      "word" : "Prettier"
+    },
+    {
+      "word" : "Entra"
+    },
+    {
+      "word" : "Pino"
+    },
+    {
+      "word" : "React Query"
+    },
+    {
+      "word" : "Newtonsoft"
+    },
+    {
+      "word" : "npm"
+    },
+    {
+      "word" : "spog-mockup-offers"
+    },
+    {
+      "word" : "Medallia"
+    },
+    {
+      "word" : "SignalR"
+    },
+    {
+      "word" : "Neovim"
+    },
+    {
+      "word" : "ExcelJS"
+    },
+    {
+      "word" : "LaunchDarkly"
+    },
+    {
+      "word" : "FireLens"
+    },
+    {
+      "word" : "spog-mockup-customers"
+    },
+    {
+      "word" : "Base UI"
+    },
+    {
+      "word" : "useEffect"
+    },
+    {
+      "word" : "consumer-join-ui"
+    },
+    {
+      "word" : "useRef"
+    },
+    {
+      "word" : "Koji"
+    },
+    {
+      "word" : "Playwright"
+    },
+    {
+      "word" : "Dynatrace"
+    },
+    {
+      "word" : "CleverTap"
+    },
+    {
+      "word" : "useMemo"
+    },
+    {
+      "word" : "consumer-join-bff"
+    },
+    {
+      "word" : "spog-ui"
+    },
+    {
+      "word" : "Recharts"
+    },
+    {
+      "word" : "Turbopack"
+    },
+    {
+      "word" : "Stripe"
+    },
+    {
+      "word" : "Proxyman"
+    },
+    {
+      "word" : "Purpose Brands"
+    },
+    {
+      "word" : "SheepDip"
+    },
+    {
+      "word" : "Allure"
+    },
+    {
+      "word" : "Sonner"
+    },
+    {
+      "word" : "React Hook Form"
+    },
+    {
+      "word" : "Heroicons"
+    },
+    {
+      "word" : "lead-service"
+    },
+    {
+      "word" : "spog-mockup"
+    },
+    {
+      "word" : "Hey API"
+    },
+    {
+      "word" : "TSX"
+    },
+    {
+      "word" : "TypeScript"
+    },
+    {
+      "word" : "Ghostty"
+    },
+    {
+      "word" : "useState"
+    },
+    {
+      "word" : "React"
+    },
+    {
+      "word" : "Server Actions"
+    },
+    {
+      "word" : "lint-staged"
+    },
+    {
+      "word" : "useCallback"
+    },
+    {
+      "word" : "person-service"
+    },
+    {
+      "word" : "identity-service"
+    },
+    {
+      "word" : "Crowdin"
+    },
+    {
+      "word" : "spog-mockup-product-catalog"
+    },
+    {
+      "word" : "React Intl"
+    },
+    {
+      "word" : "Tailwind CSS"
+    },
+    {
+      "word" : "goal-service"
+    },
+    {
+      "word" : "TanStack Query"
+    },
+    {
+      "word" : "PactSafe"
+    },
+    {
+      "word" : "note-service"
+    },
+    {
+      "word" : "spog-mockup-locations"
+    },
+    {
+      "word" : "Zod"
+    },
+    {
+      "word" : "Husky"
+    },
+    {
+      "word" : "CodeArtifact"
+    },
+    {
+      "word" : "spog-mockup-online-signup"
+    },
+    {
+      "word" : "RudderStack"
+    },
+    {
+      "word" : "Trivago"
+    },
+    {
+      "word" : "ESLint"
+    },
+    {
+      "word" : "SWC"
+    },
+    {
+      "word" : "Next.js"
+    },
+    {
+      "word" : "Snowflake"
+    },
+    {
+      "word" : "spog-mockup-reporting"
+    },
+    {
+      "word" : "Stripe Connect"
+    },
+    {
+      "word" : "codemode"
+    },
+    {
+      "word" : "spog-mockup-opportunities"
+    },
+    {
+      "word" : "AWS CDK"
+    },
+    {
+      "word" : "Vite"
+    },
+    {
+      "word" : "shadcn"
+    },
+    {
+      "word" : "useQuery"
+    },
+    {
+      "word" : "Chart.js"
+    },
+    {
+      "word" : "OpenAPI"
+    },
+    {
+      "word" : "useForm"
+    },
+    {
+      "word" : "useMutation"
+    },
+    {
+      "word" : "Zustand"
+    },
+    {
+      "word" : "sebrands"
+    },
+    {
+      "word" : "ASP.NET Core"
+    },
+    {
+      "word" : "spog-mockup-scheduling"
+    },
+    {
+      "word" : "JSX"
+    },
+    {
+      "word" : "spog-mockup-national-offer-management"
+    },
+    {
+      "word" : "spog-mockup-conversations"
+    },
+    {
+      "word" : "App Router"
+    },
+    {
+      "word" : "Key Vault"
+    },
+    {
+      "word" : "crm-service"
+    },
+    {
+      "word" : "engagement-log-service"
+    },
+    {
+      "word" : "Embla Carousel"
+    },
+    {
+      "word" : "Lucide"
+    },
+    {
+      "word" : "Lightning CSS"
+    },
+    {
+      "word" : "location-service"
+    },
+    {
+      "word" : "schedule-service"
+    },
+    {
+      "word" : "purchase-service"
+    },
+    {
+      "word" : "woms"
+    },
+    {
+      "word" : "FormatJS"
+    },
+    {
+      "word" : "Luxon"
+    },
+    {
+      "word" : "Server Components"
+    },
+    {
+      "word" : "Redis"
+    },
+    {
+      "word" : "spog-mockup-tasks"
+    },
+    {
+      "word" : "Noda Time"
+    },
+    {
+      "word" : "Evolt"
+    },
+    {
+      "word" : "PostCSS"
+    },
+    {
+      "word" : "TanStack"
+    },
+    {
+      "word" : "Tailwind"
+    },
+    {
+      "word" : "JSON"
+    }
+  ]
+}
