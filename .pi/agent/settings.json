@@ -34,13 +34,13 @@
         "fast": false
       },
       "reviewer": {
-        "model": "cursor/gpt-5.6-sol@272k",
+        "model": "cursor/gemini-4-neon@300k",
         "thinking": "high",
         "fast": false,
         "advertise": true
       },
       "evidence-auditor": {
-        "model": "cursor/gpt-5.6-sol@272k",
+        "model": "cursor/gemini-4-neon@300k",
         "thinking": "high",
         "fast": false
       },
@@ -115,7 +115,8 @@
     "cursor/claude-fable-5-2@300k",
     "cursor/muse-wonder-1.0@300k",
     "cursor/grok-4.7@256k",
-    "cursor/grok-4.7@256k:fast"
+    "cursor/grok-4.7@256k:fast",
+    "cursor/gemini-4-neon@300k"
   ],
   "autocompleteMaxVisible": 10,
   "fullscreenExitOutput": "resume-hint",
@@ -132,7 +133,7 @@
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.48.0",
     "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.42",
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.0",
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.1",
     "{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
     "{\"source\":\"npm:@narumitw/pi-btw\",\"scope\":\"user\"}": "0.63.8"
   }
